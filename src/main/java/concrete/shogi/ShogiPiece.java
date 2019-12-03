@@ -1,7 +1,10 @@
+package concrete.shogi;
+import piece.Piece;
+
 public class ShogiPiece extends Piece {
     private ShogiPieceEnum type;
 
-    ShogiPiece(int player, ShogiPieceEnum type){
+    public ShogiPiece(int player, ShogiPieceEnum type){
         this.player = player;
         this.type=type;
     }
@@ -11,6 +14,7 @@ public class ShogiPiece extends Piece {
         return super.player;
     }
 
+    @Override
     public ShogiPieceEnum getType() {
         return type;
     }
