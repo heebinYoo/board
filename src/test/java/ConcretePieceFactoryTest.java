@@ -1,5 +1,5 @@
 import concrete.ConcretePieceFactory;
-import concrete.chess.ChessPieceEnum;
+import concrete.chess.piece.ChessPieceEnum;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;

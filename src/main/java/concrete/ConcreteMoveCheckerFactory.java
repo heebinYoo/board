@@ -1,6 +1,6 @@
 package concrete;
 
-import concrete.chess.ChessPieceEnum;
+import concrete.chess.piece.ChessPieceEnum;
 import concrete.shogi.ShogiPieceEnum;
 import moveChecker.moveChecker;
 import moveChecker.moveCheckerFactory;

@@ -1,12 +1,16 @@
 package concrete;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import piece.Piece;
 import piece.PieceFactory;
-import concrete.chess.ChessPiece;
-import concrete.chess.ChessPieceEnum;
+import concrete.chess.piece.ChessPiece;
+import concrete.chess.piece.ChessPieceEnum;
 import concrete.shogi.ShogiPiece;
 import concrete.shogi.ShogiPieceEnum;
 
 public class ConcretePieceFactory implements PieceFactory {
+    static final Logger logger =
+            LoggerFactory.getLogger(ConcretePieceFactory.class);
     public Piece createPiece(int player, Enum e){
         if (e instanceof ShogiPieceEnum){
             return new ShogiPiece(player,(ShogiPieceEnum) e);
@@ -16,6 +20,7 @@ public class ConcretePieceFactory implements PieceFactory {
         }
         //please add new game
         else{
+            logger.error("enum error in ConcretePieceFactory");
             return null;
         }
     }

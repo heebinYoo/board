@@ -1,4 +1,4 @@
-package concrete.chess;
+package concrete.chess.piece;
 
 import piece.Piece;
 

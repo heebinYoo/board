@@ -1,6 +1,8 @@
 package game;
 
 import bean.Coord;
+import board.BoardManager;
+import concrete.ConcreteBoardFactory;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
 import concrete.GameList;
@@ -29,6 +31,7 @@ public class Game {
         concrete = new Concrete();
         gameType = gameList;
         turn = 1;
+        BoardManager.getInstance().initBoard(accessor, gameType, concrete.boardFactory);
     }
 
     /* Method */
@@ -46,9 +49,11 @@ public class Game {
 
     }
 
+    public Concrete getFactories(){return concrete;}
+
     /* Inner Class */
     private class Concrete{
-        public ConcreteBoardFactory boardFactory = new ConcreteBoardFactory();
+        private ConcreteBoardFactory boardFactory = new ConcreteBoardFactory();
         public ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
         public ConcretePieceFactory pieceFactory = new ConcretePieceFactory();
     }

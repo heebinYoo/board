@@ -11,9 +11,7 @@ public abstract class Board implements Publisher{
     private ArrayList<Observer> observers;
     public abstract void init();
 
-    public static Board getInstance() {
-        return null;
-    }
+
 
     public Board(){
         observers = new ArrayList<>();
