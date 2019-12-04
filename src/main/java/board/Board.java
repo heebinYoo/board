@@ -2,20 +2,27 @@ package board;
 
 import bean.Coord;
 import observer.Observer;
+import piece.Piece;
 
 import java.util.ArrayList;
 
 public abstract class Board implements Publisher{
-    private int[][] pieceData;
+    private Piece[][] pieceData;
     private ArrayList<Observer> observers;
     public abstract void init();
 
+    public static Board getInstance() {
+        return null;
+    }
 
     public Board(){
         observers = new ArrayList<>();
         init();
     }
 
+    public Piece status(Coord coord){
+       return pieceData[coord.getRow()][coord.getCol()];
+    }
 
 
     @Override
