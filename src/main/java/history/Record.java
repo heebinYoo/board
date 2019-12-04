@@ -1,3 +1,8 @@
+package history;
+
+import bean.Coord;
+import piece.Piece;
+
 public class Record {
     /* Field */
     Coord prev, post;
@@ -5,7 +10,7 @@ public class Record {
 
 
     /* Constructor */
-    public Record(Coord prev, Coord post,){
+    public Record(Coord prev, Coord post){
         this.prev = prev;
         this.post = post;
     }
@@ -16,5 +21,8 @@ public class Record {
     public Piece getPiece(){return piece;}
 
     @Override
-    public String toString(){}
+    public String toString(){
+        //TODO
+        return null;
+    }
 }
