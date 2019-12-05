@@ -6,6 +6,9 @@ import concrete.ConcreteBoardFactory;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
 import concrete.GameList;
+import exception.InvaildMoveException;
+import history.History;
+import history.Record;
 
 import java.util.ArrayList;
 
@@ -23,38 +26,51 @@ public class Game {
     private Concrete concrete;
     private GameList gameType;
 
-    public int turn;
+    private int turn;
 
+    public int getTurn() {
+        return turn;
+    }
 
     /* Constructor */
-    public Game(GameList gameList){
+    public Game(GameList gameList, ConcreteBoardFactory boardFactory){
         concrete = new Concrete();
         gameType = gameList;
+        concrete.boardFactory = boardFactory;
         turn = 1;
         BoardManager.getInstance().initBoard(accessor, gameType, concrete.boardFactory);
     }
 
     /* Method */
+    //true if user click user's piece
     public boolean click(Coord coord){
-        // TODO
-        return true;
+        if(turn == BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer()){
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<Coord> getMoveableList(Coord coord){
-        // TODO
-        return null;
+        return concrete.moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(coord)).getMoveableList(coord);
     }
 
     public void update(Coord prev, Coord post){
+        try {
+            BoardManager.getInstance().getBoardInstance().update(prev,post);
+            History.getInstance().add(new Record(prev, post));
+            turn = turn==1 ? 2 : 1;
+        } catch (InvaildMoveException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public Concrete getFactories(){return concrete;}
-
+    //public Concrete getFactories(){return concrete;}
+    //it is redundent, Factory can be easily and not irritatably generated
     /* Inner Class */
     private class Concrete{
-        private ConcreteBoardFactory boardFactory = new ConcreteBoardFactory();
-        public ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        public ConcretePieceFactory pieceFactory = new ConcretePieceFactory();
+        private ConcreteBoardFactory boardFactory;
+        private ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
+        //public ConcretePieceFactory pieceFactory = new ConcretePieceFactory();
     }
 }

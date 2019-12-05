@@ -1,4 +1,8 @@
+import board.BoardFactory;
+import concrete.ConcreteBoardFactory;
+import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
+import moveChecker.MoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -7,33 +11,27 @@ import org.slf4j.LoggerFactory;
 import piece.PieceFactory;
 
 import static org.junit.Assert.assertEquals;
-public class ConcretePieceFactoryTest {
+public class ConcreteFactoryTest {
 
     static final Logger logger =
-            LoggerFactory.getLogger(ConcretePieceFactoryTest.class);
+            LoggerFactory.getLogger(ConcreteFactoryTest.class);
     static PieceFactory pieceFactory;
-
+    static MoveCheckerFactory moveCheckerFactory;
+    static BoardFactory boardFactory;
     @BeforeClass
     public static void setupForClass(){
         logger.info("@BeforeClass");
         pieceFactory= new ConcretePieceFactory();
+        moveCheckerFactory = new ConcreteMoveCheckerFactory();
+        boardFactory =  new ConcreteBoardFactory();
     }
 
     @Test
-    public void test1(){
-        logger.info("@Test1");
+    public void testPiece(){
+        logger.info("@testPiece");
         assertEquals("rukh is rukh",pieceFactory.createPiece(1, ChessPieceEnum.rukh).getType(),ChessPieceEnum.rukh);
-        // fail(String)
-        // assertTrue(true);
-        // assertEquals([String message], expected, actual)
-        // assertEquals([String message], expected, actual, tolerance)
-        // assertNull([message], object)
-        // assertNotNull([message], object)
-        // assertSame([String], expected, actual)
-        // assertNotSame([String], expected, actual)
-        // assertTrue([message], boolean condition)
-
     }
+
 
 
 }

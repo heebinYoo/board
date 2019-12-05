@@ -18,4 +18,12 @@ public class ChessPiece extends Piece {
     public ChessPieceEnum getType() {
         return type;
 }
+
+    @Override
+    public String toString() {
+        return "ChessPiece{" +
+                "type=" + type +
+                ", player=" + player +
+                '}';
+    }
 }

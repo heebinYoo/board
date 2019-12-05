@@ -36,13 +36,13 @@ public class TestTest {
     }
 
 
-    @Test(expected=RuntimeException.class) //예외 발생을 예상
+    @Test(expected=RuntimeException.class)
     public void test1(){
         logger.info("@Test1");
         throw new RuntimeException();
     }
 
-    @Test(timeout=100) //100 millisecond 초과시 에러
+    @Test(timeout=100)
     public void test2(){
         logger.info("@Test 2");
 

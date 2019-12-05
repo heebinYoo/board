@@ -16,4 +16,12 @@ public class Coord {
     public int getRow() {
         return row;
     }
+
+    @Override
+    public String toString() {
+        return "Coord{" +
+                "row=" + row +
+                ", col=" + col +
+                '}';
+    }
 }

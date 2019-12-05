@@ -1,35 +1,36 @@
 package concrete;
 
+import concrete.chess.moveChecker.*;
 import concrete.chess.piece.ChessPieceEnum;
 import concrete.shogi.ShogiPieceEnum;
-import moveChecker.moveChecker;
-import moveChecker.moveCheckerFactory;
+import moveChecker.MoveChecker;
+import moveChecker.MoveCheckerFactory;
 import piece.Piece;
 
-public class ConcreteMoveCheckerFactory implements moveCheckerFactory {
+public class ConcreteMoveCheckerFactory implements MoveCheckerFactory {
     @Override
-    public moveChecker createMoveChecker(Piece piece) {
+    public MoveChecker createMoveChecker(Piece piece) {
         if (piece.getType() instanceof ChessPieceEnum) {
             switch ((ChessPieceEnum) piece.getType()) {
                 case bishop:
-                    break;
+                    return new BishopMoveChecker();
                 case king:
-                    break;
+                    return new KingMoveChecker();
                 case pawn:
-                    break;
+                    return new PawnMoveChecker();
                 case rukh:
-                    break;
+                    return new RukhMoveChecker();
                 case queen:
-                    break;
+                    return new QueenMoveChecker();
                 case knight:
-                    break;
+                    return new KnightMoveChecker();
             }
         } else if (piece.getType() instanceof ShogiPieceEnum) {
             switch ((ShogiPieceEnum) piece.getType()) {
-
+                //TODO
             }
         }
-        //TODO
+
         return null;
     }
 }

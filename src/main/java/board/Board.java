@@ -1,27 +1,33 @@
 package board;
 
 import bean.Coord;
+import exception.InvaildMoveException;
 import observer.Observer;
 import piece.Piece;
 
 import java.util.ArrayList;
 
 public abstract class Board implements Publisher{
-    private Piece[][] pieceData;
+    protected Piece[][] pieceData;//row, col
     private ArrayList<Observer> observers;
-    public abstract void init();
+    protected abstract void init();
 
-
+    public abstract void update(Coord prev, Coord post) throws InvaildMoveException;
 
     public Board(){
         observers = new ArrayList<>();
         init();
     }
 
-    public Piece status(Coord coord){
+    public Piece getPieceOn(Coord coord){
        return pieceData[coord.getRow()][coord.getCol()];
     }
-
+    public int getBoardColSize(){
+        return pieceData.length;
+    }
+    public int getBoardRowSize(){
+        return pieceData[0].length;
+    }
 
     @Override
     public void add(Observer observer) {

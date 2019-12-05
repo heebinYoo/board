@@ -1,6 +1,7 @@
 package history;
 
 import bean.Coord;
+import board.BoardManager;
 import piece.Piece;
 
 public class Record {
@@ -13,6 +14,8 @@ public class Record {
     public Record(Coord prev, Coord post){
         this.prev = prev;
         this.post = post;
+        this.piece = BoardManager.getInstance().getBoardInstance().getPieceOn(post);
+
     }
 
     /* Method */
@@ -21,8 +24,11 @@ public class Record {
     public Piece getPiece(){return piece;}
 
     @Override
-    public String toString(){
-        //TODO
-        return null;
+    public String toString() {
+        return "Record{" +
+                "prev=" + prev +
+                ", post=" + post +
+                ", piece=" + piece +
+                '}';
     }
 }
