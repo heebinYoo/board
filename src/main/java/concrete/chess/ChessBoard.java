@@ -24,8 +24,8 @@ public class ChessBoard extends Board {
     private final int BLACK = 1;
     private final int WHITE = 2;
 
-    //0,0 black-1 ruke
-    //7,7 white-2 ruke
+    //0,0 black-p1 ruke
+    //7,7 white-p2 ruke
 
     @Override
     public void init() {
