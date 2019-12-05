@@ -64,8 +64,8 @@ public class ChessBoard extends Board {
         }
 
         //make observers
-        super.add(new CastlingObserver());
         super.add(new CheckmateObserver());
+        super.add(new CastlingObserver());
         super.add(new EnPassantObserver());
     }
 
