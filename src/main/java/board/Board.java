@@ -38,4 +38,12 @@ public abstract class Board implements Publisher{
     public void notifyObserver(Coord dst) {
         observers.forEach(observer -> observer.update(dst));
     }
+
+    public int getBoardRowSize() {
+        return pieceData.length;
+    }
+
+    public int getBoardColSize() {
+        return pieceData[0].length;
+    }
 }
