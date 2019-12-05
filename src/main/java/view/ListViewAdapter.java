@@ -1,5 +1,8 @@
 package view;
 
+import concrete.ResourceResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import piece.Piece;
 
 import javax.swing.*;
@@ -9,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ListViewAdapter implements ItemEventListener {
+
+    static final Logger logger =
+            LoggerFactory.getLogger(ListViewAdapter.class);
 
     private ArrayList<Piece> mData = null;
     private ListEventListener listEventListener = null;
@@ -56,10 +62,7 @@ public class ListViewAdapter implements ItemEventListener {
         return new ListViewHolder(position, this::onClick);
     }
     public void bindViewHolder(ListViewHolder listViewHolder, int position){
-        //TODO
-        mData.get(position).getPlayer();
-        mData.get(position).getType();
-        listViewHolder.setImgBtn("C:\\Users\\CAU\\Desktop\\d.png");
+        listViewHolder.setImgBtn(ResourceResolver.resolveIcon(mData.get(position)));
     }
     public int getItemCount(){
         return mData.size();
