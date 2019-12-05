@@ -5,6 +5,9 @@ import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
+import concrete.chess.observer.CastlingObserver;
+import concrete.chess.observer.CheckmateObserver;
+import concrete.chess.observer.EnPassantObserver;
 import concrete.chess.piece.ChessPieceEnum;
 import exception.InvaildMoveException;
 import history.History;
@@ -37,7 +40,9 @@ public class ChessBoard extends Board {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //make observers
-        //TODO
+        super.add(new CastlingObserver());
+        super.add(new CheckmateObserver());
+        super.add(new EnPassantObserver());
 
 
     }
