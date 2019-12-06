@@ -2,6 +2,7 @@ package view;
 
 import bean.Coord;
 import board.Board;
+import piece.Piece;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,6 +42,7 @@ public class TableViewAdapter implements TableItemEventLister {
         public void setImgBtn(String filename){
             imgBtn.setIcon(new ImageIcon(filename));
         }
+        public void clearImgBtn(){imgBtn.setIcon(null);}
     }
 
     /* Methoc */
@@ -50,6 +52,10 @@ public class TableViewAdapter implements TableItemEventLister {
     }
 
     public void bindViewHolder(TableViewHolder holder, Coord coord){
+        if(board.getPieceOn(coord) == null){
+            holder.clearImgBtn();
+            return;
+        }
         String type = board.getPieceOn(coord).getType().toString();
         int player = board.getPieceOn(coord).getPlayer();
         holder.setImgBtn("C:\\Users\\CAU\\Desktop\\d.jpg");
@@ -66,6 +72,11 @@ public class TableViewAdapter implements TableItemEventLister {
     @Override
     public void onClick(JPanel jPanel, Coord coord) {
         tableEventListener.onItemClick(jPanel, coord);
+    }
+
+    /* Test */
+    public Piece getPiece(Coord coord){
+        return board.getPieceOn(coord);
     }
 }
 
