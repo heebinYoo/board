@@ -54,4 +54,10 @@ public class TestTest {
         // assertTrue([message], boolean condition)
 
     }
+    @Test
+    public void test3(){
+        logger.info("@Test 3");
+
+
+    }
 }
