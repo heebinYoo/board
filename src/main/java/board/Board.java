@@ -22,12 +22,7 @@ public abstract class Board implements Publisher{
     public Piece getPieceOn(Coord coord){
        return pieceData[coord.getRow()][coord.getCol()];
     }
-    public int getBoardColSize(){
-        return pieceData.length;
-    }
-    public int getBoardRowSize(){
-        return pieceData[0].length;
-    }
+
 
     @Override
     public void add(Observer observer) {
@@ -40,7 +35,15 @@ public abstract class Board implements Publisher{
     }
 
     @Override
-    public void notifyObserver(Coord dst) {
-        observers.forEach(observer -> observer.update(dst));
+    public void notifyObserver(Coord prev, Coord post) {
+        observers.forEach(observer -> observer.update(prev,post));
+    }
+
+    public int getBoardRowSize() {
+        return pieceData.length;
+    }
+
+    public int getBoardColSize() {
+        return pieceData[0].length;
     }
 }

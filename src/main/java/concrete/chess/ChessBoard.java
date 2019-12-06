@@ -8,6 +8,7 @@ import concrete.ConcretePieceFactory;
 import concrete.chess.observer.CastlingObserver;
 import concrete.chess.observer.CheckmateObserver;
 import concrete.chess.observer.EnPassantObserver;
+import concrete.chess.observer.Promotion;
 import concrete.chess.piece.ChessPieceEnum;
 import exception.InvaildMoveException;
 import history.History;
@@ -24,8 +25,8 @@ public class ChessBoard extends Board {
     private final int BLACK = 1;
     private final int WHITE = 2;
 
-    //0,0 black-1 ruke
-    //7,7 white-2 ruke
+    //0,0 black-p1 ruke
+    //7,7 white-p2 ruke
 
     @Override
     public void init() {
@@ -64,9 +65,10 @@ public class ChessBoard extends Board {
         }
 
         //make observers
-        super.add(new CastlingObserver());
         super.add(new CheckmateObserver());
+        super.add(new CastlingObserver());
         super.add(new EnPassantObserver());
+        super.add(new Promotion());
     }
 
     //recursivily called
@@ -76,7 +78,7 @@ public class ChessBoard extends Board {
         if(checkSafe(prev,post,target)) {
             super.pieceData[prev.getRow()][prev.getCol()] = null;
             super.pieceData[post.getRow()][prev.getCol()] = target;
-            notifyObserver(post);
+            notifyObserver(prev, post);
         }
         else{
             throw new InvaildMoveException(prev, post, target);
@@ -89,4 +91,6 @@ public class ChessBoard extends Board {
         MoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
         return moveCheckerFactory.createMoveChecker(target).moveableCheck(prev,post);
     }
+
+
 }
