@@ -8,7 +8,7 @@ import concrete.ConcretePieceFactory;
 import concrete.chess.observer.CastlingObserver;
 import concrete.chess.observer.CheckmateObserver;
 import concrete.chess.observer.EnPassantObserver;
-import concrete.chess.observer.Promotion;
+import concrete.chess.observer.PromotionObserver;
 import concrete.chess.piece.ChessPieceEnum;
 import exception.InvaildMoveException;
 import moveChecker.MoveCheckerFactory;
@@ -68,7 +68,7 @@ public class ChessBoard extends Board {
         super.add(new CheckmateObserver());
         super.add(new CastlingObserver());
         super.add(new EnPassantObserver());
-        super.add(new Promotion());
+        super.add(new PromotionObserver());
     }
 
     //recursivily called
