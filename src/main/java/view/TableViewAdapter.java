@@ -2,6 +2,7 @@ package view;
 
 import bean.Coord;
 import board.Board;
+import concrete.ResourceResolver;
 import piece.Piece;
 
 import javax.swing.*;
@@ -56,9 +57,7 @@ public class TableViewAdapter implements TableItemEventLister {
             holder.clearImgBtn();
             return;
         }
-        String type = board.getPieceOn(coord).getType().toString();
-        int player = board.getPieceOn(coord).getPlayer();
-        holder.setImgBtn("C:\\Users\\CAU\\Desktop\\d.jpg");
+        holder.setImgBtn(ResourceResolver.resolveIcon(board.getPieceOn(coord)));
     }
 
     public Coord getItemCount(){

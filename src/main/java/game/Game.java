@@ -65,6 +65,10 @@ public class Game {
 
     }
 
+    public GameList getGameType() {
+        return gameType;
+    }
+
     //public Concrete getFactories(){return concrete;}
     //it is redundent, Factory can be easily and not irritatably generated
     /* Inner Class */

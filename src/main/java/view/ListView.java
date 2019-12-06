@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ListView extends JFrame {
+    private ListViewAdapter listViewAdapter;
 
     static final Logger logger =
             LoggerFactory.getLogger(ListView.class);
@@ -18,6 +19,7 @@ public class ListView extends JFrame {
         super("ListView");
         this.setLayout(new FlowLayout());
 
+        this.listViewAdapter = listViewAdapter;
         listViewAdapter.setListEventListener(new ListEventListener() {
             @Override
             public void onItemClick(JPanel jPanel, int position) {
@@ -25,15 +27,20 @@ public class ListView extends JFrame {
             }
         });
 
+        notifyUpdated();
+
+        this.setSize(new Dimension(50,300));
+        this.setVisible(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void notifyUpdated(){
+        this.removeAll();
         for (int i = 0; i < listViewAdapter.getItemCount(); i++) {
             ListViewAdapter.ListViewHolder listViewHolder = listViewAdapter.createViewHolder(i);
             listViewAdapter.bindViewHolder(listViewHolder, i);
             this.add(listViewHolder);
         }
-
-        this.setSize(new Dimension(50,300));
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }
