@@ -30,9 +30,9 @@ public class ListView extends JFrame {
 
         notifyUpdated();
 
-        this.setSize(new Dimension(50,300));
         this.setVisible(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     public void notifyUpdated(){
@@ -43,6 +43,7 @@ public class ListView extends JFrame {
             this.add(listViewHolder);
         }
         this.repaint();
+        this.pack();
     }
 
 }

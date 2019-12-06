@@ -32,7 +32,7 @@ public class ListViewTest {
         new ListView(new ListViewAdapter(pieces), new ListClickListener() {
             @Override
             public void onClick(JPanel jPanel, int position) {
-
+                pieces.remove(position);
             }
         });
         while(true){

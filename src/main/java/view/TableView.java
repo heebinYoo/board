@@ -36,8 +36,7 @@ public class TableView extends JFrame {
 
         this.add(mainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(50,50,600,600);
-        this.setVisible(true);
+        this.setVisible(false);
     }
 
     public void notifyUpdated(){

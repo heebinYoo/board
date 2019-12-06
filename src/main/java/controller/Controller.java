@@ -56,21 +56,39 @@ public class Controller implements TableClickListener{
         this.game = game;
         this.tableView = tableView;
         this.tableView.setTableClickListener(this::onClick);
-        killed1 = new ArrayList<>();
-        killed2 = new ArrayList<>();
-        killedListView1 = new ListView(new ListViewAdapter(killed1), killedListView1Listener);
-        killedListView2 = new ListView(new ListViewAdapter(killed2), killedListView2Listener);
-        promotionView1 = new ListView(new ListViewAdapter(new PromotionPieceList(game.getGameType(), 1)),promotionView1Listener);
-        promotionView2 = new ListView(new ListViewAdapter(new PromotionPieceList(game.getGameType(), 2)),promotionView2Listener);
-        killedListView1.setTitle("1Player Killed List");
-        killedListView2.setTitle("2Player Killed List");
-        promotionView1.setTitle("1Player can Promote");
-        promotionView2.setTitle("2Player can Promote");
+
+        initView();
+
         killedListView1.setVisible(true);
+        killedListView2.setVisible(true);
         promotionView1.setVisible(true);
     }
 
     /* Method */
+    private void initView(){
+        killed1 = new ArrayList<>();
+        killed2 = new ArrayList<>();
+        killedListView1 = new ListView(new ListViewAdapter(killed1), killedListView1Listener);
+        killedListView2 = new ListView(new ListViewAdapter(killed2), killedListView2Listener);
+
+
+        promotionView1 = new ListView(new ListViewAdapter(new PromotionPieceList(game.getGameType(), 1)),promotionView1Listener);
+        promotionView2 = new ListView(new ListViewAdapter(new PromotionPieceList(game.getGameType(), 2)),promotionView2Listener);
+
+        killedListView1.setTitle("1Player Killed List");
+        killedListView2.setTitle("2Player Killed List");
+        promotionView1.setTitle("1Player can Promote");
+        promotionView2.setTitle("2Player can Promote");
+
+        int location = 50;
+        int size = 600;
+        tableView.setLocation(location, location);
+        tableView.setSize(size, size);
+        tableView.setVisible(true);
+        killedListView1.setLocation(location + size, 50);
+        killedListView2.setLocation(location + size, location + size/2);
+    }
+
     private ArrayList<Coord> lastMoveableList = null;
     private Coord lastSelectedCoord = null;
     @Override
