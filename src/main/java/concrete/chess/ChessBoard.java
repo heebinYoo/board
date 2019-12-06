@@ -11,8 +11,6 @@ import concrete.chess.observer.EnPassantObserver;
 import concrete.chess.observer.Promotion;
 import concrete.chess.piece.ChessPieceEnum;
 import exception.InvaildMoveException;
-import history.History;
-import history.Record;
 import moveChecker.MoveCheckerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,29 +37,31 @@ public class ChessBoard extends Board {
         //make piceData
         //for player 1 and player 2
         //put in pieceData, in appropriate place
-        super.pieceData[0][0] = pieceFactory.createPiece(BLACK, ChessPieceEnum.rukh);
-        super.pieceData[0][1] = pieceFactory.createPiece(BLACK, ChessPieceEnum.knight);
-        super.pieceData[0][2] = pieceFactory.createPiece(BLACK, ChessPieceEnum.bishop);
-        super.pieceData[0][3] = pieceFactory.createPiece(BLACK, ChessPieceEnum.king);
-        super.pieceData[0][4] = pieceFactory.createPiece(BLACK, ChessPieceEnum.queen);
-        super.pieceData[0][5] = pieceFactory.createPiece(BLACK, ChessPieceEnum.bishop);
-        super.pieceData[0][6] = pieceFactory.createPiece(BLACK, ChessPieceEnum.rukh);
+        super.pieceData[0][0] = pieceFactory.createPiece(BLACK, ChessPieceEnum.rukh, "black"+"pawn"+0);
+        super.pieceData[0][1] = pieceFactory.createPiece(BLACK, ChessPieceEnum.knight, "black"+"knight"+0);
+        super.pieceData[0][2] = pieceFactory.createPiece(BLACK, ChessPieceEnum.bishop, "black"+"bishop"+0);
+        super.pieceData[0][3] = pieceFactory.createPiece(BLACK, ChessPieceEnum.king, "black"+"king"+0);
+        super.pieceData[0][4] = pieceFactory.createPiece(BLACK, ChessPieceEnum.queen, "black"+"queen"+0);
+        super.pieceData[0][5] = pieceFactory.createPiece(BLACK, ChessPieceEnum.bishop, "black"+"bishop"+1);
+        super.pieceData[7][6] = pieceFactory.createPiece(WHITE, ChessPieceEnum.knight, "white"+"knight"+1);
+        super.pieceData[0][7] = pieceFactory.createPiece(BLACK, ChessPieceEnum.rukh, "black"+"rukh"+1);
 
         for(int i = 0; i < 7 ; i++) {
-            super.pieceData[1][i] = pieceFactory.createPiece(BLACK, ChessPieceEnum.pawn);
+            super.pieceData[1][i] = pieceFactory.createPiece(BLACK, ChessPieceEnum.pawn, "black"+"pawn"+i);
         }
 
 
-        super.pieceData[7][0] = pieceFactory.createPiece(WHITE, ChessPieceEnum.rukh);
-        super.pieceData[7][1] = pieceFactory.createPiece(WHITE, ChessPieceEnum.knight);
-        super.pieceData[7][2] = pieceFactory.createPiece(WHITE, ChessPieceEnum.bishop);
-        super.pieceData[7][3] = pieceFactory.createPiece(WHITE, ChessPieceEnum.king);
-        super.pieceData[7][4] = pieceFactory.createPiece(WHITE, ChessPieceEnum.queen);
-        super.pieceData[7][5] = pieceFactory.createPiece(WHITE, ChessPieceEnum.bishop);
-        super.pieceData[7][6] = pieceFactory.createPiece(WHITE, ChessPieceEnum.rukh);
+        super.pieceData[7][0] = pieceFactory.createPiece(WHITE, ChessPieceEnum.rukh, "white"+"rukh"+ 0);
+        super.pieceData[7][1] = pieceFactory.createPiece(WHITE, ChessPieceEnum.knight, "white"+"knight"+0);
+        super.pieceData[7][2] = pieceFactory.createPiece(WHITE, ChessPieceEnum.bishop, "white"+"bishop"+0);
+        super.pieceData[7][3] = pieceFactory.createPiece(WHITE, ChessPieceEnum.king, "white"+"king"+0);
+        super.pieceData[7][4] = pieceFactory.createPiece(WHITE, ChessPieceEnum.queen, "white"+"queen"+0);
+        super.pieceData[7][5] = pieceFactory.createPiece(WHITE, ChessPieceEnum.bishop, "white"+"bishop"+1);
+        super.pieceData[7][6] = pieceFactory.createPiece(WHITE, ChessPieceEnum.knight, "white"+"knight"+1);
+        super.pieceData[7][7] = pieceFactory.createPiece(WHITE, ChessPieceEnum.rukh, "white"+"rukh"+1);
 
         for(int i = 0; i < 7 ; i++) {
-            super.pieceData[6][i]=pieceFactory.createPiece(WHITE, ChessPieceEnum.pawn);
+            super.pieceData[6][i]=pieceFactory.createPiece(WHITE, ChessPieceEnum.pawn, "white"+"pawn"+i);
         }
 
         //make observers
