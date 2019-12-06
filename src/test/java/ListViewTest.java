@@ -1,5 +1,6 @@
 import concrete.ConcretePieceFactory;
 import concrete.chess.piece.ChessPieceEnum;
+import controller.ListClickListener;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,12 @@ public class ListViewTest {
         pieces.add(p3);
         pieces.add(p4);
 
-        new ListView(new ListViewAdapter(pieces));
+        new ListView(new ListViewAdapter(pieces), new ListClickListener() {
+            @Override
+            public void onClick(JPanel jPanel, int position) {
+
+            }
+        });
         while(true){
 
         }

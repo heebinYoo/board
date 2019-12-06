@@ -31,6 +31,9 @@ public class TableViewAdapter implements TableItemEventLister {
             super(new BorderLayout(), true);
             this.coord=coord;
 
+            imgBtn.setBorderPainted(false);
+            imgBtn.setContentAreaFilled(false);
+            imgBtn.setFocusPainted(false);
             imgBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {

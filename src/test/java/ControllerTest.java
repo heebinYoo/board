@@ -3,6 +3,7 @@ import board.Board;
 import concrete.ConcreteBoardFactory;
 import concrete.ConcretePieceFactory;
 import concrete.GameList;
+import concrete.PromotionPieceList;
 import concrete.chess.piece.ChessPieceEnum;
 import controller.Controller;
 import exception.InvaildMoveException;
@@ -48,6 +49,9 @@ public class ControllerTest {
 
     @Test
     public void test1(){
+
+        new PromotionPieceList(GameList.chess, 1).forEach(piece -> logger.debug(piece.toString()));
+
         new Controller(new Game(GameList.chess,new ConcreteBoardFactory()),  new TableView(new TableViewAdapter(new TestBoard())));
         while(true){
 

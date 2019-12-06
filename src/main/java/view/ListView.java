@@ -1,5 +1,6 @@
 package view;
 
+import controller.ListClickListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,8 +16,7 @@ public class ListView extends JFrame {
     static final Logger logger =
             LoggerFactory.getLogger(ListView.class);
 
-    public ListView(ListViewAdapter listViewAdapter) throws HeadlessException {
-        super("ListView");
+    public ListView(ListViewAdapter listViewAdapter, ListClickListener listClickListener) throws HeadlessException {
         this.setLayout(new FlowLayout());
 
         this.listViewAdapter = listViewAdapter;
@@ -24,6 +24,7 @@ public class ListView extends JFrame {
             @Override
             public void onItemClick(JPanel jPanel, int position) {
                 logger.debug("data on "+position + " piece data " +listViewAdapter.getPiece(position));
+                listClickListener.onClick(jPanel, position);
             }
         });
 
@@ -35,12 +36,13 @@ public class ListView extends JFrame {
     }
 
     public void notifyUpdated(){
-        this.removeAll();
+        this.getContentPane().removeAll();
         for (int i = 0; i < listViewAdapter.getItemCount(); i++) {
             ListViewAdapter.ListViewHolder listViewHolder = listViewAdapter.createViewHolder(i);
             listViewAdapter.bindViewHolder(listViewHolder, i);
             this.add(listViewHolder);
         }
+        this.repaint();
     }
 
 }

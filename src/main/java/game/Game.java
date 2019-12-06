@@ -9,6 +9,7 @@ import concrete.GameList;
 import exception.InvaildMoveException;
 import history.History;
 import history.Record;
+import piece.Piece;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,9 @@ public class Game {
             return true;
         }
         return false;
+    }
+    public Piece getPiece(Coord coord){
+        return BoardManager.getInstance().getBoardInstance().getPieceOn(coord);
     }
 
     public ArrayList<Coord> getMoveableList(Coord coord){
