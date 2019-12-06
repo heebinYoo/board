@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class TableView extends JFrame {
@@ -16,17 +14,11 @@ public class TableView extends JFrame {
     static final Logger logger =
             LoggerFactory.getLogger(ListView.class);
 
-
-    /* Field */
-    private ArrayList<JPanel> jPanels;
-    private JPanel mainPanel;
-
     /* Constructor */
     public TableView(TableViewAdapter tableViewAdapter) throws HeadlessException{
         super("TableView");
         GridLayout layout = new GridLayout(tableViewAdapter.getItemCount().getRow(), tableViewAdapter.getItemCount().getCol());
-        mainPanel = new JPanel(layout);
-        jPanels = new ArrayList<>();
+        JPanel mainPanel = new JPanel(layout);
 
         tableViewAdapter.setTableEventListener(new TableEventListener(){
             @Override
@@ -42,17 +34,10 @@ public class TableView extends JFrame {
                 tableViewAdapter.bindViewHolder(tableViewHolder, coord);
                 mainPanel.add(tableViewHolder);
             }
-        buildFrame();
-    }
 
-    /* Method */
-    private void buildFrame(){
         this.add(mainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        /* 창의 사이즈와 관련된 함수들 */
-        this.setBounds(50,50,600,600); // x, y는 시작 위치, width, height는 창의 크기. 0이여도 내부 구성물의 최소 크기만큼 표시된다.
-        //this.pack(); // 최소 크기로 실행.
+        this.setBounds(50,50,600,600);
         this.setVisible(true);
     }
 }
