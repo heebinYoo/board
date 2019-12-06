@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class CheckmateObserver implements Observer {
     private ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
     @Override
-    public void update(Coord coord) {
-        if(!(BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getType() == ChessPieceEnum.king)){
+    public void update(Coord prev, Coord post) {
+        if(!(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.king)){
 
-           ArrayList<Coord> isKingThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(coord)).getMoveableList(coord);
+           ArrayList<Coord> isKingThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(post)).getMoveableList(post);
            //checked check
            for(int i = 0; i< isKingThere.size(); i++){
                if(BoardManager.getInstance().getBoardInstance().getPieceOn(isKingThere.get(i)).getType() == ChessPieceEnum.king) {
@@ -30,7 +30,7 @@ public class CheckmateObserver implements Observer {
                                            if(KingLoc.get(m)==CheckedOrNot.get(n)) {
                                                //Cannot move to here
                                                KingLoc.remove(m);
-                                               break;
+                                               return;
                                            }
                                        }
                                    }

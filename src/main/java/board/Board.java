@@ -40,7 +40,7 @@ public abstract class Board implements Publisher{
     }
 
     @Override
-    public void notifyObserver(Coord dst) {
-        observers.forEach(observer -> observer.update(dst));
+    public void notifyObserver(Coord prev, Coord post) {
+        observers.forEach(observer -> observer.update(prev,post));
     }
 }
