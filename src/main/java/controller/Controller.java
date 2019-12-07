@@ -2,6 +2,7 @@ package controller;
 
 import bean.Coord;
 import concrete.PromotionPieceList;
+import concrete.chess.observer.SelectedListener;
 import game.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ import view.TableView;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Controller implements TableClickListener{
+public class Controller implements TableClickListener, BoardEventListner{
     /* Test */
     static final Logger logger =
             LoggerFactory.getLogger(Controller.class);
@@ -38,13 +39,18 @@ public class Controller implements TableClickListener{
     private ListClickListener promotionView1Listener = new ListClickListener() {
         @Override
         public void onClick(JPanel jPanel, int position) {
-            new PromotionPieceList(game.getGameType(), 1).get(position);
+            promotionView1.setVisible(false);
+            selectedListener.onSelect(new PromotionPieceList(game.getGameType(),1).get(position));
+
+
         }
     };
     private ListClickListener promotionView2Listener = new ListClickListener() {
         @Override
         public void onClick(JPanel jPanel, int position) {
-            new PromotionPieceList(game.getGameType(), 2).get(position);
+            promotionView1.setVisible(false);
+
+            selectedListener.onSelect(new PromotionPieceList(game.getGameType(),2).get(position));
         }
     };
     private ArrayList<Piece> killed1, killed2;
@@ -53,9 +59,12 @@ public class Controller implements TableClickListener{
     private Piece fromKilledList = null;
     private Coord postCoord = null;
 
+    private SelectedListener selectedListener;
+
     /* Constructor */
     public Controller(Game game, TableView tableView){
         this.game = game;
+        this.game.setBoardEventListner(this);
         this.tableView = tableView;
         this.tableView.setTableClickListener(this::onClick);
 
@@ -63,7 +72,7 @@ public class Controller implements TableClickListener{
 
         killedListView1.setVisible(true);
         killedListView2.setVisible(true);
-        promotionView1.setVisible(true);
+
     }
 
     /* Method */
@@ -125,5 +134,36 @@ public class Controller implements TableClickListener{
             }
         }
         postCoord = coord;
+    }
+
+    @Override
+    public void onKilled(Piece piece) {
+
+
+        switch(piece.getPlayer()){
+        case 1:
+            killed1.add(piece);
+            killedListView1.notifyUpdated();
+            break;
+        case 2:
+            killed2.add(piece);
+            killedListView1.notifyUpdated();
+    }
+
+
+    }
+
+    @Override
+    public void onPromoted(Piece piece, SelectedListener callback) {
+        this.selectedListener=callback;
+        switch(piece.getPlayer()){
+            case 1:
+                promotionView1.setVisible(true);
+                promotionView1.requestFocus();
+            case 2:
+                promotionView2.setVisible(true);
+                promotionView2.requestFocus();
+        }
+
     }
 }
