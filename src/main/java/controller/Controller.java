@@ -103,7 +103,8 @@ public class Controller implements TableClickListener, BoardEventListner{
     private boolean checkMovableList(Coord coord){
         if(movableList != null) {
             for (Coord point : movableList) {
-                if (point.getRow() == coord.getRow() && point.getCol() == coord.getCol()) return true;
+                if (point.getRow() == coord.getRow() && point.getCol() == coord.getCol())
+                    return true;
             }
         }
         return false;

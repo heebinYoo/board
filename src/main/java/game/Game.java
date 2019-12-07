@@ -69,6 +69,7 @@ public class Game{
             BoardManager.getInstance().getBoardInstance().update(prev,post);
             History.getInstance().add(new Record(prev, post));
             turn = turn==1 ? 2 : 1;
+            System.out.println(turn);
         } catch (InvaildMoveException e) {
             e.printStackTrace();
         }

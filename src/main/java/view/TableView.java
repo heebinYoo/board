@@ -77,7 +77,6 @@ public class TableView extends JFrame {
         this.repaint();
         this.revalidate();
 
-        System.out.println("d");
     }
 
     public void setTableClickListener(TableClickListener tableClickListener){

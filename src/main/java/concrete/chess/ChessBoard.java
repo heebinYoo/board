@@ -86,11 +86,11 @@ public class ChessBoard extends Board {
     @Override
     public void update(Coord prev, Coord post) throws InvaildMoveException {
         Piece target = BoardManager.getInstance().getBoardInstance().getPieceOn(prev);
+
         if(checkSafe(prev,post,target)) {
-            if(super.pieceData[prev.getRow()][prev.getCol()]!=null){
-                this.boardEventListner.onKilled(super.pieceData[prev.getRow()][prev.getCol()]);
-                super.pieceData[prev.getRow()][prev.getCol()] = null;
-            }
+            super.pieceData[prev.getRow()][prev.getCol()] = null;
+            if(super.pieceData[post.getRow()][post.getCol()]!=null)
+                this.boardEventListner.onKilled(super.pieceData[post.getRow()][post.getCol()]);
             super.pieceData[post.getRow()][prev.getCol()] = target;
             notifyObserver(prev, post);
         }
