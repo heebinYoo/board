@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 public class KingMoveChecker implements MoveChecker {
 
+    //주석주석주석
     public ArrayList<Coord> getMoveableList(Coord coord) {
         ArrayList<Coord> result = new ArrayList<Coord>();
         int rowSize = BoardManager.getInstance().getBoardInstance().getBoardRowSize();
