@@ -142,7 +142,6 @@ public class Controller implements TableClickListener, BoardEventListner{
     @Override
     public void onKilled(Piece piece) {
 
-
         switch(piece.getPlayer()){
         case 1:
             killed1.add(piece);
