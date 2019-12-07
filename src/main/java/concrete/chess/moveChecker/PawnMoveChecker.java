@@ -95,7 +95,7 @@ public class PawnMoveChecker implements MoveChecker {
             Coord colsub = new Coord(coord.getRow(), coord.getCol() - 1);//내 왼쪽
             Piece piecesub = BoardManager.getInstance().getBoardInstance().getPieceOn(colsub);
             if (piece != null) {
-                if (pieceadd.equals(piece)) {   //최근 움직인 말이 내 오른쪽에 있다
+                if (piece.equals(pieceadd)) {   //최근 움직인 말이 내 오른쪽에 있다
                     boolean existpast = false;    //과거에 움직인적이 있나요?
                     if ((ChessPieceEnum) piece.getType() == ChessPieceEnum.pawn) {//근데 그게 폰임
                         Iterator<Record> it = History.getInstance().iterator();
@@ -115,7 +115,7 @@ public class PawnMoveChecker implements MoveChecker {
                         }
                     }
                 }
-                if (piecesub.equals(piece)) {   //최근 움직인 말이 내 왼쪽에 있다
+                if (piece.equals(piecesub)) {   //최근 움직인 말이 내 왼쪽에 있다
                     boolean existpast = false;    //과거에 움직인적이 있나요?
                     if ((ChessPieceEnum) piece.getType() == ChessPieceEnum.pawn) {//근데 그게 폰임
                         Iterator<Record> it = History.getInstance().iterator();
