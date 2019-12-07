@@ -163,7 +163,7 @@ public class QueenMoveChecker implements MoveChecker {
         //없으면 false
         //list 있으면 true
 
-        ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
+
         ArrayList<Coord> isQueenThere = this.getMoveableList(prev);
         for (int i = 0; i < isQueenThere.size(); i++) {
             if (isQueenThere.get(i).getRow()==post.getRow()&&isQueenThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재

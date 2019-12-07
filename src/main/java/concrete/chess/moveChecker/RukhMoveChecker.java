@@ -101,7 +101,7 @@ public class RukhMoveChecker implements MoveChecker {
         //없으면 false
         //list 있으면 true
 
-        ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
+
         ArrayList<Coord> isRukhThere = this.getMoveableList(prev);
         for (int i = 0; i < isRukhThere.size(); i++) {
             if (isRukhThere.get(i).getRow()==post.getRow()&&isRukhThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재

@@ -92,7 +92,7 @@ public class KnightMoveChecker implements MoveChecker {
         //없으면 false
         //list 있으면 true
 
-        ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
+
         ArrayList<Coord> isKnightThere = this.getMoveableList(prev);
         for (int i = 0; i < isKnightThere.size(); i++) {
             if (isKnightThere.get(i).getRow()==post.getRow()&&isKnightThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재

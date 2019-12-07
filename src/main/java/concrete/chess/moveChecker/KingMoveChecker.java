@@ -65,7 +65,7 @@ public class KingMoveChecker implements MoveChecker {
 
     public boolean moveableCheck(Coord prev, Coord post) {
 
-        ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
+
         ArrayList<Coord> isKingThere = this.getMoveableList(prev);
         for (int i = 0; i < isKingThere.size(); i++) {
             if (isKingThere.get(i).getRow() == post.getRow() && isKingThere.get(i).getCol() == post.getCol()) { //list 안에 post 좌표값 존재
