@@ -48,7 +48,7 @@ public class ChessBoard extends Board {
         //make piceData
         //for player 1 and player 2
         //put in pieceData, in appropriate place
-        super.pieceData[0][0] = pieceFactory.createPiece(BLACK, ChessPieceEnum.rukh, "black"+"pawn"+0);
+        super.pieceData[0][0] = pieceFactory.createPiece(BLACK, ChessPieceEnum.rukh, "black"+"rukh"+0);
         super.pieceData[0][1] = pieceFactory.createPiece(BLACK, ChessPieceEnum.knight, "black"+"knight"+0);
         super.pieceData[0][2] = pieceFactory.createPiece(BLACK, ChessPieceEnum.bishop, "black"+"bishop"+0);
         super.pieceData[0][3] = pieceFactory.createPiece(BLACK, ChessPieceEnum.king, "black"+"king"+0);
