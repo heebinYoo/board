@@ -23,12 +23,12 @@ public class ControllerTest {
 
     @Test
     public void test1(){
-
-        Game game = new Game(GameList.chess,new ConcreteBoardFactory());
+        // TODO not fixed yet
+        //Game game = new Game(GameList.chess,new ConcreteBoardFactory());
 
         new PromotionPieceList(GameList.chess, 1).forEach(piece -> logger.debug(piece.toString()));
 
-        new Controller(new Game(GameList.chess,new ConcreteBoardFactory()),  new TableView(new TableViewAdapter(BoardManager.getInstance().getBoardInstance())));
+        //new Controller(new Game(GameList.chess,new ConcreteBoardFactory()),  new TableView(new TableViewAdapter(BoardManager.getInstance().getBoardInstance())));
         while(true){
 
         }

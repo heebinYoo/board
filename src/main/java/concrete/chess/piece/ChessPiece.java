@@ -25,6 +25,7 @@ public class ChessPiece extends Piece {
         return "ChessPiece{" +
                 "type=" + type +
                 ", player=" + player +
+                ", id='" + id + '\'' +
                 '}';
     }
 }
