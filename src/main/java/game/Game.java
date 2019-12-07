@@ -66,6 +66,8 @@ public class Game {
         } catch (InvaildMoveException e) {
             e.printStackTrace();
         }
+    }
+    public void update(Piece piece, Coord coord){
 
     }
 
