@@ -114,7 +114,7 @@ public class ChessBoard extends Board {
 
     private boolean checkSafe(Coord prev, Coord post, Piece target){
         MoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        return moveCheckerFactory.createMoveChecker(target).moveableCheck(prev,post);
+        return moveCheckerFactory.createMoveChecker(target).movableCheck(prev,post);
     }
 
     @Override

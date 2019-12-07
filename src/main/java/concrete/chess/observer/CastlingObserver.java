@@ -1,10 +1,8 @@
 package concrete.chess.observer;
 
 import bean.Coord;
-import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
-import concrete.chess.piece.ChessPiece;
 import concrete.chess.piece.ChessPieceEnum;
 import controller.BoardEventListner;
 import exception.InvaildMoveException;
@@ -71,7 +69,7 @@ public class CastlingObserver implements Observer {
                                 Coord Board = new Coord(i, j);
                                 if (BoardManager.getInstance().getBoardInstance().getPieceOn(Board) != null) {
                                     if (BoardManager.getInstance().getBoardInstance().getPieceOn(Board).getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) {
-                                        ArrayList<Coord> obs = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(Board)).getMoveableList(Board);
+                                        ArrayList<Coord> obs = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(Board)).getMovableList(Board);
                                         for (int k = 0; k < obs.size(); k++) {
                                             for (int l = 0; l < KingsWay.size(); l++) {
                                                 if (obs.get(k) == KingsWay.get(l)) {

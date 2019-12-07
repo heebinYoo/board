@@ -1,4 +1,4 @@
-package concrete.janggi;
+package concrete.twelveJanggi;
 
 import bean.Coord;
 import board.Board;
@@ -6,7 +6,7 @@ import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
 import concrete.chess.observer.PromotionObserver;
-import concrete.janggi.piece.JanggiPieceEnum;
+import concrete.twelveJanggi.piece.TwelveJanggiPieceEnum;
 import controller.BoardEventListner;
 import exception.InvaildMoveException;
 import game.Game;
@@ -17,7 +17,7 @@ import piece.PieceFactory;
 
 import java.util.Iterator;
 
-public class JanggiBoard extends Board {
+public class TwelveJanggiBoard extends Board {
 
     /* Field */
     private final int RED = 1;
@@ -25,7 +25,7 @@ public class JanggiBoard extends Board {
     private BoardEventListner boardEventListner;
 
     /* Constructor */
-    public JanggiBoard(Game.Accessor accessor){
+    public TwelveJanggiBoard(Game.Accessor accessor){
         super(accessor);
     }
 
@@ -35,15 +35,15 @@ public class JanggiBoard extends Board {
         super.pieceData = new Piece[3][4];
         PieceFactory pieceFactory = new ConcretePieceFactory();
 
-        super.pieceData[0][0] = pieceFactory.createPiece(RED, JanggiPieceEnum.sang, "red"+"sang");
-        super.pieceData[1][0] = pieceFactory.createPiece(RED, JanggiPieceEnum.wang, "red"+"wang");
-        super.pieceData[2][0] = pieceFactory.createPiece(RED, JanggiPieceEnum.jang, "red"+"jang");
-        super.pieceData[1][1] = pieceFactory.createPiece(RED, JanggiPieceEnum.za, "red"+"za");
+        super.pieceData[0][0] = pieceFactory.createPiece(RED, TwelveJanggiPieceEnum.sang, "red"+"sang");
+        super.pieceData[1][0] = pieceFactory.createPiece(RED, TwelveJanggiPieceEnum.wang, "red"+"wang");
+        super.pieceData[2][0] = pieceFactory.createPiece(RED, TwelveJanggiPieceEnum.jang, "red"+"jang");
+        super.pieceData[1][1] = pieceFactory.createPiece(RED, TwelveJanggiPieceEnum.za, "red"+"za");
 
-        super.pieceData[0][3] = pieceFactory.createPiece(GREEN, JanggiPieceEnum.jang, "green"+"jang");
-        super.pieceData[1][3] = pieceFactory.createPiece(GREEN, JanggiPieceEnum.wang, "green"+"wang");
-        super.pieceData[2][3] = pieceFactory.createPiece(GREEN, JanggiPieceEnum.sang, "green"+"sang");
-        super.pieceData[1][2] = pieceFactory.createPiece(GREEN, JanggiPieceEnum.za, "green"+"za");
+        super.pieceData[0][3] = pieceFactory.createPiece(GREEN, TwelveJanggiPieceEnum.jang, "green"+"jang");
+        super.pieceData[1][3] = pieceFactory.createPiece(GREEN, TwelveJanggiPieceEnum.wang, "green"+"wang");
+        super.pieceData[2][3] = pieceFactory.createPiece(GREEN, TwelveJanggiPieceEnum.sang, "green"+"sang");
+        super.pieceData[1][2] = pieceFactory.createPiece(GREEN, TwelveJanggiPieceEnum.za, "green"+"za");
 
         // TODO make observers
         super.add(new PromotionObserver());
@@ -82,6 +82,6 @@ public class JanggiBoard extends Board {
 
     private boolean checkSafe(Coord prev, Coord post, Piece target){
         MoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        return moveCheckerFactory.createMoveChecker(target).moveableCheck(prev, post);
+        return moveCheckerFactory.createMoveChecker(target).movableCheck(prev, post);
     }
 }

@@ -1,5 +1,5 @@
 package concrete;
 
 public enum GameList {
-    chess, shogi
+    chess, shogi, twelveJanggi
 }

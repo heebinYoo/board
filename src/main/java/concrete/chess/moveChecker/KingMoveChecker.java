@@ -5,7 +5,6 @@ import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
 import controller.BoardEventListner;
-import exception.InvaildMoveException;
 import history.History;
 import history.Record;
 import moveChecker.MoveChecker;
@@ -16,7 +15,7 @@ import java.util.Iterator;
 
 public class KingMoveChecker implements MoveChecker {
 
-    public ArrayList<Coord> getMoveableList(Coord coord) {
+    public ArrayList<Coord> getMovableList(Coord coord) {
         ArrayList<Coord> result = new ArrayList<Coord>();
         int rowSize = BoardManager.getInstance().getBoardInstance().getBoardRowSize();
         int colSize = BoardManager.getInstance().getBoardInstance().getBoardColSize();
@@ -67,10 +66,10 @@ public class KingMoveChecker implements MoveChecker {
     }
 
 
-    public boolean moveableCheck(Coord prev, Coord post) {
+    public boolean movableCheck(Coord prev, Coord post) {
 
 
-        ArrayList<Coord> isKingThere = this.getMoveableList(prev);
+        ArrayList<Coord> isKingThere = this.getMovableList(prev);
         for (int i = 0; i < isKingThere.size(); i++) {
             if (isKingThere.get(i).getRow() == post.getRow() && isKingThere.get(i).getCol() == post.getCol()) { //list 안에 post 좌표값 존재
                 return true;
@@ -136,7 +135,7 @@ public class KingMoveChecker implements MoveChecker {
                                 Coord Board = new Coord(i, j);
                                 if (BoardManager.getInstance().getBoardInstance().getPieceOn(Board) != null) {
                                     if (BoardManager.getInstance().getBoardInstance().getPieceOn(Board).getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) {
-                                        ArrayList<Coord> obs = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(Board)).getMoveableList(Board);
+                                        ArrayList<Coord> obs = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(Board)).getMovableList(Board);
                                         for (int k = 0; k < obs.size(); k++) {
                                             for (int l = 0; l < KingsWay.size(); l++) {
                                                 if (obs.get(k) == KingsWay.get(l)) {
@@ -171,19 +170,19 @@ public class KingMoveChecker implements MoveChecker {
         if ((BoardManager.getInstance().getBoardInstance().getPieceOn(post) != null)&&(BoardManager.getInstance().getBoardInstance().getPieceOn(prev)!=null)){
             if (!(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.king)) {
 
-                ArrayList<Coord> isKingThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(post)).getMoveableList(post);
+                ArrayList<Coord> isKingThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(post)).getMovableList(post);
                 //checked check
                 for (int i = 0; i < isKingThere.size(); i++) {
                     if(BoardManager.getInstance().getBoardInstance().getPieceOn(isKingThere.get(i))!=null) {
                         if (BoardManager.getInstance().getBoardInstance().getPieceOn(isKingThere.get(i)).getType() == ChessPieceEnum.king) {
-                            ArrayList<Coord> KingLoc = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(isKingThere.get(i))).getMoveableList(isKingThere.get(i));
+                            ArrayList<Coord> KingLoc = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(isKingThere.get(i))).getMovableList(isKingThere.get(i));
                             for (int j = 0; j < KingLoc.size(); j++) {
                                 for (int k = 0; k < 8; k++) {
                                     for (int l = 0; l < 8; l++) {
                                         Coord BoardCoord = new Coord(k, l);
                                         if ((BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord) != null)&&(BoardManager.getInstance().getBoardInstance().getPieceOn(KingLoc.get(j))!=null)) {
                                             if (BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord).getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(KingLoc.get(j)).getPlayer()) {
-                                                ArrayList<Coord> CheckedOrNot = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord)).getMoveableList(BoardCoord);
+                                                ArrayList<Coord> CheckedOrNot = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord)).getMovableList(BoardCoord);
                                                 for (int m = 0; m < KingLoc.size(); m++) {
                                                     for (int n = 0; n < CheckedOrNot.size(); n++) {
                                                         if (KingLoc.get(m) == CheckedOrNot.get(n)) {

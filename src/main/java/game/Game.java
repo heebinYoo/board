@@ -58,7 +58,7 @@ public class Game{
     }
 
     public ArrayList<Coord> getMoveableList(Coord coord){
-        return concrete.moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(coord)).getMoveableList(coord);
+        return concrete.moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(coord)).getMovableList(coord);
     }
 
     public void update(Coord prev, Coord post){
