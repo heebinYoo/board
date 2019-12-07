@@ -42,8 +42,11 @@ public class ListView extends JFrame {
             listViewAdapter.bindViewHolder(listViewHolder, i);
             this.add(listViewHolder);
         }
-        this.repaint();
         this.pack();
+        this.invalidate();
+        this.repaint();
+        this.revalidate();
+
     }
 
 }

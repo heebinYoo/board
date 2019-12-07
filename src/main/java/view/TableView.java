@@ -59,7 +59,9 @@ public class TableView extends JFrame {
                 tableViewAdapter.bindViewHolder(tableViewHolder, coord);
                 mainPanel.add(tableViewHolder);
             }
+        this.invalidate();
         this.repaint();
+        this.revalidate();
     }
 
     public void drawMoveablePoint(ArrayList<Coord> coords){
