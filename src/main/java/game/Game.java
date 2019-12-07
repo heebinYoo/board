@@ -1,6 +1,8 @@
 package game;
 
 import bean.Coord;
+import board.Board;
+import board.BoardFactory;
 import board.BoardManager;
 import concrete.ConcreteBoardFactory;
 import concrete.ConcreteMoveCheckerFactory;
@@ -9,11 +11,14 @@ import concrete.GameList;
 import exception.InvaildMoveException;
 import history.History;
 import history.Record;
+import moveChecker.MoveCheckerFactory;
 import piece.Piece;
 
 import java.util.ArrayList;
 
 public class Game {
+
+
 
     /* Accessor for Board init */
     public static final class Accessor{
@@ -34,10 +39,11 @@ public class Game {
     }
 
     /* Constructor */
-    public Game(GameList gameList, ConcreteBoardFactory boardFactory){
+    public Game(GameList gameList, BoardFactory boardFactory, MoveCheckerFactory moveCheckerFactory){
         concrete = new Concrete();
         gameType = gameList;
         concrete.boardFactory = boardFactory;
+        concrete.moveCheckerFactory = moveCheckerFactory ;
         turn = 1;
         BoardManager.getInstance().initBoard(accessor, gameType, concrete.boardFactory);
     }
@@ -69,6 +75,10 @@ public class Game {
 
     }
 
+    public Board getBoard() {
+        return BoardManager.getInstance().getBoardInstance();
+    }
+
     public GameList getGameType() {
         return gameType;
     }
@@ -77,8 +87,8 @@ public class Game {
     //it is redundent, Factory can be easily and not irritatably generated
     /* Inner Class */
     private class Concrete{
-        private ConcreteBoardFactory boardFactory;
-        private ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
+        private BoardFactory boardFactory;
+        private MoveCheckerFactory moveCheckerFactory;
         //public ConcretePieceFactory pieceFactory = new ConcretePieceFactory();
     }
 }

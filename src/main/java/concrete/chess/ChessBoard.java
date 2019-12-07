@@ -51,10 +51,10 @@ public class ChessBoard extends Board {
         super.pieceData[0][3] = pieceFactory.createPiece(BLACK, ChessPieceEnum.king, "black"+"king"+0);
         super.pieceData[0][4] = pieceFactory.createPiece(BLACK, ChessPieceEnum.queen, "black"+"queen"+0);
         super.pieceData[0][5] = pieceFactory.createPiece(BLACK, ChessPieceEnum.bishop, "black"+"bishop"+1);
-        super.pieceData[7][6] = pieceFactory.createPiece(WHITE, ChessPieceEnum.knight, "white"+"knight"+1);
+        super.pieceData[0][6] = pieceFactory.createPiece(WHITE, ChessPieceEnum.knight, "white"+"knight"+1);
         super.pieceData[0][7] = pieceFactory.createPiece(BLACK, ChessPieceEnum.rukh, "black"+"rukh"+1);
 
-        for(int i = 0; i < 7 ; i++) {
+        for(int i = 0; i < 8 ; i++) {
             super.pieceData[1][i] = pieceFactory.createPiece(BLACK, ChessPieceEnum.pawn, "black"+"pawn"+i);
         }
 
@@ -68,7 +68,7 @@ public class ChessBoard extends Board {
         super.pieceData[7][6] = pieceFactory.createPiece(WHITE, ChessPieceEnum.knight, "white"+"knight"+1);
         super.pieceData[7][7] = pieceFactory.createPiece(WHITE, ChessPieceEnum.rukh, "white"+"rukh"+1);
 
-        for(int i = 0; i < 7 ; i++) {
+        for(int i = 0; i < 8 ; i++) {
             super.pieceData[6][i]=pieceFactory.createPiece(WHITE, ChessPieceEnum.pawn, "white"+"pawn"+i);
         }
 
