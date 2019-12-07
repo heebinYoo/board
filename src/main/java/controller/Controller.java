@@ -15,11 +15,11 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Controller implements TableClickListener{
-
+    /* Test */
     static final Logger logger =
             LoggerFactory.getLogger(Controller.class);
 
-
+    /* Field */
     private Game game;
     private TableView tableView;
 
@@ -48,10 +48,9 @@ public class Controller implements TableClickListener{
             new PromotionPieceList(game.getGameType(), 2).get(position);
         }
     };
-
     private ArrayList<Piece> killed1, killed2;
 
-
+    /* Constructor */
     public Controller(Game game, TableView tableView){
         this.game = game;
         this.tableView = tableView;
@@ -89,29 +88,9 @@ public class Controller implements TableClickListener{
         killedListView2.setLocation(location + size, location + size/2);
     }
 
-    private ArrayList<Coord> lastMoveableList = null;
-    private Coord lastSelectedCoord = null;
     @Override
     public void onClick(JPanel jPanel, Coord coord) {
         logger.debug("data on "+coord + " piece data ");
-        /*
-        if(lastMoveableList != null && lastMoveableList.contains(coord)){
-            game.update(lastSelectedCoord, coord); // use Last list to check coord == clicked
-            return; // updated and function end
-        }
-        if(game.getPiece(coord) == null) //Todo
-            return;
-        else if(!game.click(coord)){ // clicked coord is not my piece
-            lastSelectedCoord = null;
-            lastMoveableList = null;
-            tableView.notifyUpdated();
-            return;
-        }
 
-
-        lastSelectedCoord = coord;
-        lastMoveableList = game.getMoveableList(coord);
-        tableView.drawMoveablePoint(lastMoveableList);
-        */
     }
 }

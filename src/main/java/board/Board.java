@@ -2,6 +2,7 @@ package board;
 
 import bean.Coord;
 import exception.InvaildMoveException;
+import game.Game;
 import observer.Observer;
 import piece.Piece;
 
@@ -14,7 +15,7 @@ public abstract class Board implements Publisher{
 
     public abstract void update(Coord prev, Coord post) throws InvaildMoveException;
 
-    public Board(){
+    public Board(Game.Accessor accessor){
         observers = new ArrayList<>();
         init();
     }
