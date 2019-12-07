@@ -34,8 +34,7 @@ public class PawnMoveChecker implements MoveChecker {
         Piece piece;
         if(History.getInstance().getLast()!=null){
             piece=History.getInstance().getLast().getPiece(); //최근 상대
-        }
-        piece=null;
+        }else piece=null;
 
 
         if(malice.getPlayer()==1&&coord.getRow()==4){  //내가 player1 이고 앙파상의 조건1이 만족
