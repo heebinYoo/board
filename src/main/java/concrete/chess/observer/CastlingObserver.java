@@ -11,6 +11,7 @@ import exception.InvaildMoveException;
 import history.History;
 import history.Record;
 import observer.Observer;
+import piece.Piece;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,16 +27,17 @@ public class CastlingObserver implements Observer {
                 if (History.getInstance().getLast() != null) {
                     Iterator<Record> it = History.getInstance().iterator();
                     while (it.hasNext()) {
-                        if ((it.next().getPiece().getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) &&
-                                (it.next().getPiece().getType() == ChessPieceEnum.king))
+                        Piece piece_history = it.next().getPiece();
+                        if ((piece_history.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) &&
+                                (piece_history.getType() == ChessPieceEnum.king))
                             return; //king moved before -> not castling
 
-                        if ((it.next().getPiece().getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) &&
-                                (it.next().getPiece().getId().contains("rukh") && it.next().getPiece().getId().contains("0"))) {
+                        if ((piece_history.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) &&
+                                (piece_history.getId().contains("rukh") && piece_history.getId().contains("0"))) {
                             //id 0 rukh moved before -> not castling
                             rukh1 = true;
-                        } else if ((it.next().getPiece().getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) &&
-                                (it.next().getPiece().getId().contains("rukh") && it.next().getPiece().getId().contains("1"))) {
+                        } else if ((piece_history.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) &&
+                                (piece_history.getId().contains("rukh") && piece_history.getId().contains("1"))) {
                             //id 1 rukh moved before -> not castling
                             rukh2 = true;
                         }
