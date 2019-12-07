@@ -1,5 +1,5 @@
 package concrete.chess.moveChecker;
-
+import concrete.chess.CheckChecker;
 import bean.Coord;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
@@ -33,31 +33,32 @@ public class KingMoveChecker implements MoveChecker {
         //캐슬링인지
         //가려고 하는 곳(캐슬링 가능시)
 
-        Coord CastlingWay1=new Coord(coord.getRow(),coord.getCol()+3);
-        Coord CastlingWay2=new Coord(coord.getRow(),coord.getCol()-2);
-        if(update(coord, CastlingWay1)){
-            //캐슬링 가능하면 add
-            result.add(CastlingWay1);
-        }
-        if(update(coord, CastlingWay2)){
+        Coord CastlingWay1 = new Coord(coord.getRow(), coord.getCol() + 3);
+        Coord CastlingWay2 = new Coord(coord.getRow(), coord.getCol() - 2);
+        if (coord.getRow() == 0 || coord.getRow() == 7){
+            if (update(coord, CastlingWay1)) {
+                //캐슬링 가능하면 add
+                result.add(CastlingWay1);
+            }
+        if (update(coord, CastlingWay2)) {
             result.add(CastlingWay2);
         }
+    }
 
-        for(int i=-1;i<=1;i++){
-            for(int j=-1;j<=1;j++){
-                if(i==0&&j==0)
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0)
                     break;
-                Coord mod=new Coord(coord.getRow()+i,coord.getCol()+j);
-                if(mod.getRow()>=0&&mod.getRow()<rowSize&&mod.getCol()>=0&&mod.getCol()<colSize){
+                Coord mod = new Coord(coord.getRow() + i, coord.getCol() + j);
+                if (mod.getRow() >= 0 && mod.getRow() < rowSize && mod.getCol() >= 0 && mod.getCol() < colSize) {
                     //일단 판위임
                     //비어있거나 적군이 있음
-                    Piece modpiece=BoardManager.getInstance().getBoardInstance().getPieceOn(mod);
-                    if(modpiece==null||modpiece.getPlayer()!=malice.getPlayer()) {
+                    Piece modpiece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod);
+                    if (modpiece == null || modpiece.getPlayer() != malice.getPlayer()) {
                         //그 위치 체크 당하는지 안 당하는지
-                        if (update2(coord, mod)) {
-                            //체크 아니라면
+                        CheckChecker check=new CheckChecker();
+                        if(!check.isCheck(malice,mod))
                             result.add(mod);
-                        }
                     }
 
                 }
@@ -86,6 +87,91 @@ public class KingMoveChecker implements MoveChecker {
 
     //@Override
     public boolean update(Coord prev, Coord post) {
+        /*
+룩과 킹이 한번도 움직이지 않았어야 한다.
+룩과 킹 사이에 아무것도 있으면 안된다.
+현재 킹이 체크되어있으면 안된다.
+킹이 통과하는 칸에 적의 말이 이동가능해서는 안된다.*/
+        Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(prev); //나7
+        if (post.getCol() == 6) {
+            //오른쪽
+            Iterator<Record> it = History.getInstance().iterator();
+            while (it.hasNext()) {
+                Piece piece = it.next().getPiece(); //히스토리 포인터
+                if ((piece.getType().equals(ChessPieceEnum.king)) &&
+                        (piece.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer())) {//내쪽 킹
+                    return false;   //past king moved
+                }
+                if ((piece.getType().equals(ChessPieceEnum.rukh)) &&
+                        (piece.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer())) {//내쪽 룩
+                    if (piece.getId().equals(7))//오른쪽 룩
+                        return false;   //past rukh moved
+                }
+
+            }
+            for (int j = 4; j < 7; j++) {
+                Coord rightexist = new Coord(prev.getRow(), j);
+                Piece right = BoardManager.getInstance().getBoardInstance().getPieceOn(rightexist);
+                if (right != null)
+                    return false;
+                CheckChecker check = new CheckChecker();
+                if (check.isCheck(malice, rightexist)) {
+                    return false;   //가는길에 내 킹 체크 있어
+                }
+            }
+            CheckChecker check = new CheckChecker();
+            if (check.isCheck(malice, prev)) {
+                return false;       //지금 체크라면
+            }
+        }
+
+        if (post.getCol() == 1) {
+            //왼쪽
+            Iterator<Record> it = History.getInstance().iterator();
+            while (it.hasNext()) {
+                Piece piece = it.next().getPiece(); //히스토리 포인터
+                if ((piece.getType().equals(ChessPieceEnum.king)) &&
+                        (piece.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer())) {//내쪽 킹
+                    return false;   //past king moved
+                }
+                if ((piece.getType().equals(ChessPieceEnum.rukh)) &&
+                        (piece.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer())) {//내쪽 룩
+                    if (piece.getId().equals(0))//오른쪽 룩
+                        return false;   //past rukh moved
+                }
+
+            }
+            for (int j = 1; j < 3; j++) {
+                Coord leftexist = new Coord(prev.getRow(), j);
+                Piece right = BoardManager.getInstance().getBoardInstance().getPieceOn(leftexist);
+                if (right != null)
+                    return false;
+                CheckChecker check = new CheckChecker();
+                if (check.isCheck(malice, leftexist)) {
+                    return false;   //가는길에 내 킹 체크 있어
+                }
+            }
+            CheckChecker check = new CheckChecker();
+            if (check.isCheck(malice, prev)) {
+                return false;       //지금 체크라면
+            }
+        }
+
+        return true;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+/*
+
         ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
         boolean rukh1 = false, rukh2 = false;
 
@@ -216,4 +302,4 @@ public class KingMoveChecker implements MoveChecker {
     }
 
 
-}
+}*/
