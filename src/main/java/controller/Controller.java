@@ -150,7 +150,7 @@ public class Controller implements TableClickListener, BoardEventListner{
             break;
         case 2:
             killed2.add(piece);
-            killedListView1.notifyUpdated();
+            killedListView2.notifyUpdated();
     }
 
 
