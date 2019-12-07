@@ -36,107 +36,121 @@ public class PawnMoveChecker implements MoveChecker {
             piece=History.getInstance().getLast().getPiece(); //최근 상대
         }else piece=null;
 
-
         if(malice.getPlayer()==1&&coord.getRow()==4){  //내가 player1 이고 앙파상의 조건1이 만족
 
             Coord coladd=new Coord(coord.getRow(),coord.getCol()+1);//내 오른쪽
             Piece pieceadd = BoardManager.getInstance().getBoardInstance().getPieceOn(coladd);
             Coord colsub=new Coord(coord.getRow(),coord.getCol()-1);//내 왼쪽
             Piece piecesub = BoardManager.getInstance().getBoardInstance().getPieceOn(colsub);
-            if(pieceadd.equals(piece)){   //최근 움직인 말이 내 오른쪽에 있다
+            if(pieceadd!=null&&pieceadd.equals(piece)){   //최근 움직인 말이 내 오른쪽에 있다
                 boolean existpast=false;    //과거에 움직인적이 있나요?
                 if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
                     Iterator<Record> it = History.getInstance().iterator();
-                    while(it.hasNext()){
-                        //특정폰. 이 id의 상대폰
-                        if((it.next().getPiece().getId()==Integer.toString(coladd.getCol()))&&
-                                (it.next().getPiece().getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
-                            existpast=true;
-                            break;//처음 움직인게 아니랍니다
+
+                        while (it.hasNext()) {
+                            //특정폰. 이 id의 상대폰
+                            Piece piecepawn = it.next().getPiece();
+                            if ((piecepawn.getId() == Integer.toString(coladd.getCol())) &&
+                                    (piecepawn.getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
+                                existpast = true;
+                                break;//처음 움직인게 아니랍니다
+                            }
+
+                        if (existpast == false) {//처음움직인거래
+                            Coord enpassant = new Coord(coladd.getRow() + 1, coladd.getCol());
+                            result.add(enpassant); //그 뒤쪽으로 갈 수 있다
                         }
-                    }
-                    if(existpast==false) {//처음움직인거래
-                        Coord enpassant = new Coord(coladd.getRow() + 1, coladd.getCol());
-                        result.add(enpassant); //그 뒤쪽으로 갈 수 있다
-                    }
-                }
-            }
-            if(piecesub.equals(piece)){   //최근 움직인 말이 내 왼쪽에 있다
-                boolean existpast=false;    //과거에 움직인적이 있나요?
-                if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
-                    Iterator<Record> it = History.getInstance().iterator();
-                    while(it.hasNext()){
-                        //특정폰. 이 id의 상대폰
-                        if((it.next().getPiece().getId()==Integer.toString(colsub.getCol()))&&
-                                (it.next().getPiece().getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
-                            existpast=true;
-                            break;//처음 움직인게 아니랍니다
-                        }
-                    }
-                    if(existpast==false) {//처음움직인거래
-                        Coord enpassant = new Coord(colsub.getRow() + 1, colsub.getCol());
-                        result.add(enpassant); //그 뒤쪽으로 갈 수 있다
                     }
                 }
             }
 
-        }
-        if(malice.getPlayer()==2&&coord.getRow()==3){  //내가 player2 이고 앙파상의 조건1이 만족
+            else if(piecesub!=null&&piecesub.equals(piece)){   //최근 움직인 말이 내 왼쪽에 있다
+                boolean existpast=false;    //과거에 움직인적이 있나요?
+                if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
+                    Iterator<Record> it = History.getInstance().iterator();
 
-            Coord coladd=new Coord(coord.getRow(),coord.getCol()+1);//내 오른쪽
+                        while (it.hasNext()) {
+                            //특정폰. 이 id의 상대폰
+                            Piece piecepawn = it.next().getPiece();
+                            if ((piecepawn.getId() == Integer.toString(colsub.getCol())) &&
+                                    (piecepawn.getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
+                                existpast = true;
+                                break;//처음 움직인게 아니랍니다
+                            }
+                            piecepawn = it.next().getPiece();
+                        }
+                        if (existpast == false) {//처음움직인거래
+                            Coord enpassant = new Coord(colsub.getRow() + 1, colsub.getCol());
+                            result.add(enpassant); //그 뒤쪽으로 갈 수 있다
+                        }
+                    }
+                }
+            }
+
+
+        if(malice.getPlayer()==2&&coord.getRow()==3) {  //내가 player2 이고 앙파상의 조건1이 만족
+
+            Coord coladd = new Coord(coord.getRow(), coord.getCol() + 1);//내 오른쪽
             Piece pieceadd = BoardManager.getInstance().getBoardInstance().getPieceOn(coladd);
-            Coord colsub=new Coord(coord.getRow(),coord.getCol()-1);//내 왼쪽
+            Coord colsub = new Coord(coord.getRow(), coord.getCol() - 1);//내 왼쪽
             Piece piecesub = BoardManager.getInstance().getBoardInstance().getPieceOn(colsub);
-            if(pieceadd.equals(piece)){   //최근 움직인 말이 내 오른쪽에 있다
-                boolean existpast=false;    //과거에 움직인적이 있나요?
-                if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
-                    Iterator<Record> it = History.getInstance().iterator();
-                    while(it.hasNext()){
-                        //특정폰. 이 id의 상대폰
-                        if((it.next().getPiece().getId()==Integer.toString(coladd.getCol()))&&
-                                (it.next().getPiece().getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
-                            existpast=true;
-                            break;//처음 움직인게 아니랍니다
-                        }
-                    }
-                    if(existpast==false) {//처음움직인거래
-                        Coord enpassant = new Coord(coladd.getRow() -1, coladd.getCol());
-                        result.add(enpassant); //그 뒤쪽으로 갈 수 있다
-                    }
-                }
-            }
-            if(piecesub.equals(piece)){   //최근 움직인 말이 내 왼쪽에 있다
-                boolean existpast=false;    //과거에 움직인적이 있나요?
-                if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
-                    Iterator<Record> it = History.getInstance().iterator();
-                    while(it.hasNext()){
-                        //특정폰. 이 id의 상대폰
-                        if((it.next().getPiece().getId()==Integer.toString(colsub.getCol()))&&
-                                (it.next().getPiece().getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
-                            existpast=true;
-                            break;//처음 움직인게 아니랍니다
-                        }
-                    }
-                    if(existpast==false) {//처음움직인거래
-                        Coord enpassant = new Coord(colsub.getRow() -1, colsub.getCol());
-                        result.add(enpassant); //그 뒤쪽으로 갈 수 있다
-                    }
-                }
-            }
+            if (piece != null) {
+                if (pieceadd.equals(piece)) {   //최근 움직인 말이 내 오른쪽에 있다
+                    boolean existpast = false;    //과거에 움직인적이 있나요?
+                    if ((ChessPieceEnum) piece.getType() == ChessPieceEnum.pawn) {//근데 그게 폰임
+                        Iterator<Record> it = History.getInstance().iterator();
 
+                        while (it.hasNext()) {
+                            //특정폰. 이 id의 상대폰
+                            Piece piecepawn = it.next().getPiece();
+                            if ((piecepawn.getId() == Integer.toString(coladd.getCol())) &&
+                                    (piecepawn.getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
+                                existpast = true;
+                                break;//처음 움직인게 아니랍니다
+                            }
+                        }
+                        if (existpast == false) {//처음움직인거래
+                            Coord enpassant = new Coord(coladd.getRow() - 1, coladd.getCol());
+                            result.add(enpassant); //그 뒤쪽으로 갈 수 있다
+                        }
+                    }
+                }
+                if (piecesub.equals(piece)) {   //최근 움직인 말이 내 왼쪽에 있다
+                    boolean existpast = false;    //과거에 움직인적이 있나요?
+                    if ((ChessPieceEnum) piece.getType() == ChessPieceEnum.pawn) {//근데 그게 폰임
+                        Iterator<Record> it = History.getInstance().iterator();
+
+                        while (it.hasNext()) {
+                            Piece piecepawn = it.next().getPiece();
+                            //특정폰. 이 id의 상대폰
+                            if ((piecepawn.getId() == Integer.toString(colsub.getCol())) &&
+                                    (piecepawn.getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getPlayer())) {//과거 기록중 이 특정 폰 존재(움직임)
+                                existpast = true;
+                                break;//처음 움직인게 아니랍니다
+                            }
+                        }
+                        if (existpast == false) {//처음움직인거래
+                            Coord enpassant = new Coord(colsub.getRow() - 1, colsub.getCol());
+                            result.add(enpassant); //그 뒤쪽으로 갈 수 있다
+                        }
+                    }
+                }
+
+            }
         }
-
         //대각선에 적이 있을때 그쪽 이동 가능
         //1. 대각선. 앞 한칸씩 add
         //2. 처음이었다면 앞 2칸 add
         if(malice.getPlayer()==1){
            //2.
             Iterator<Record> it = History.getInstance().iterator();
+
             boolean existpast=false;    //과거에 움직인적이 있나요?
             while(it.hasNext()){
                 //나
                 //그전의 기록에서 내가 있는지
-                if((it.next().getPiece().getId()==malice.getId())&& (it.next().getPiece().getPlayer()==2)) {//player1 의 내 폰 id
+                Piece piecepawn = it.next().getPiece();
+                if((piecepawn.getId()==malice.getId())&& (piecepawn.getPlayer()==1)) {//player1 의 내 폰 id
                     existpast=true;
                     break;//처음 움직인게 아니랍니다
                 }
@@ -178,7 +192,8 @@ public class PawnMoveChecker implements MoveChecker {
             while(it.hasNext()){
                 //나
                 //그전의 기록에서 내가 있는지
-                if((it.next().getPiece().getId()==malice.getId())&& (it.next().getPiece().getPlayer()==1)) {//player2 의 내 폰 id
+                Piece piecepawn = it.next().getPiece();
+                if((piecepawn.getId()==malice.getId())&& (piecepawn.getPlayer()==2)) {//player2 의 내 폰 id
                     existpast=true;
                     break;//처음 움직인게 아니랍니다
                 }

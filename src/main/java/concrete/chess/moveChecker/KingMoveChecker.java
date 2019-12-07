@@ -21,7 +21,8 @@ public class KingMoveChecker implements MoveChecker {
         int rowSize = BoardManager.getInstance().getBoardInstance().getBoardRowSize();
         int colSize = BoardManager.getInstance().getBoardInstance().getBoardColSize();
 
-        Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(coord); //나
+        Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(coord); //나7
+
         // Piece piece = History.getInstance().getLast().getPiece(); //최근 상대
 
         //1. 판 위인지
@@ -51,7 +52,7 @@ public class KingMoveChecker implements MoveChecker {
                     //일단 판위임
                     //비어있거나 적군이 있음
                     Piece modpiece=BoardManager.getInstance().getBoardInstance().getPieceOn(mod);
-                    if(mod==null||modpiece.getPlayer()!=malice.getPlayer()) {
+                    if(modpiece==null||modpiece.getPlayer()!=malice.getPlayer()) {
                         //그 위치 체크 당하는지 안 당하는지
                         if (update2(coord, mod)) {
                             //체크 아니라면
