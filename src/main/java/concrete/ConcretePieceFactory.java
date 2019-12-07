@@ -11,12 +11,12 @@ import concrete.shogi.ShogiPieceEnum;
 public class ConcretePieceFactory implements PieceFactory {
     static final Logger logger =
             LoggerFactory.getLogger(ConcretePieceFactory.class);
-    public Piece createPiece(int player, Enum e){
+    public Piece createPiece(int player, Enum e, String id){
         if (e instanceof ShogiPieceEnum){
-            return new ShogiPiece(player,(ShogiPieceEnum) e);
+            return new ShogiPiece(player,(ShogiPieceEnum) e,id);
         }
         else if(e instanceof ChessPieceEnum){
-           return new ChessPiece(player,(ChessPieceEnum) e);
+           return new ChessPiece(player,(ChessPieceEnum) e,id);
         }
         //please add new game
         else{

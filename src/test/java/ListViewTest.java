@@ -19,10 +19,10 @@ public class ListViewTest {
     @Test
     public void testInflate(){
         PieceFactory pieceFactory = new ConcretePieceFactory();
-        Piece p1=pieceFactory.createPiece(1, ChessPieceEnum.rukh);
-        Piece p2=pieceFactory.createPiece(1, ChessPieceEnum.king);
-        Piece p3=pieceFactory.createPiece(1, ChessPieceEnum.queen);
-        Piece p4=pieceFactory.createPiece(1, ChessPieceEnum.bishop);
+        Piece p1=pieceFactory.createPiece(1, ChessPieceEnum.rukh,"rukh1");
+        Piece p2=pieceFactory.createPiece(1, ChessPieceEnum.king,"king1");
+        Piece p3=pieceFactory.createPiece(1, ChessPieceEnum.queen,"queen1");
+        Piece p4=pieceFactory.createPiece(1, ChessPieceEnum.bishop,"bishop1");
         ArrayList<Piece> pieces = new ArrayList<>();
         pieces.add(p1);
         pieces.add(p2);

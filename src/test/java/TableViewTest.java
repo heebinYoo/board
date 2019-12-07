@@ -22,6 +22,7 @@ public class TableViewTest {
     static final Logger logger =
             LoggerFactory.getLogger(ConcreteFactoryTest.class);
 
+
     private ArrayList<Coord> lastMoveableList;
     private Coord lastSelectedCoord;
 

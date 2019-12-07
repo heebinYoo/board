@@ -29,7 +29,7 @@ public class ConcreteFactoryTest {
     @Test
     public void testPiece(){
         logger.info("@testPiece");
-        assertEquals("rukh is rukh",pieceFactory.createPiece(1, ChessPieceEnum.rukh).getType(),ChessPieceEnum.rukh);
+        assertEquals("rukh is rukh",pieceFactory.createPiece(1, ChessPieceEnum.rukh,"rukh1").getType(),ChessPieceEnum.rukh);
     }
 
 
