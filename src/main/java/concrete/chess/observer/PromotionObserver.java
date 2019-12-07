@@ -30,11 +30,13 @@ public class PromotionObserver implements Observer, SelectedListener {
 
     @Override
     public void update(Coord prev, Coord post) {
-        if (BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.pawn) {
-            if (post.getRow() == (BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer() * (-7) + 14)) {
-                lastPiece = BoardManager.getInstance().getBoardInstance().getPieceOn(post);
-                lastCoord = post;
-                boardEventListner.onPromoted(lastPiece, this);
+        if ((BoardManager.getInstance().getBoardInstance().getPieceOn(post) != null) && (BoardManager.getInstance().getBoardInstance().getPieceOn(prev) != null)) {
+            if (BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.pawn) {
+                if (post.getRow() == (BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer() * (-7) + 14)) {
+                    lastPiece = BoardManager.getInstance().getBoardInstance().getPieceOn(post);
+                    lastCoord = post;
+                    boardEventListner.onPromoted(lastPiece, this);
+                }
             }
         }
     }
