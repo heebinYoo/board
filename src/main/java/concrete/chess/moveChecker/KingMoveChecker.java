@@ -31,6 +31,7 @@ public class KingMoveChecker implements MoveChecker {
 
         //캐슬링인지
         //가려고 하는 곳(캐슬링 가능시)
+
         Coord CastlingWay1=new Coord(coord.getRow(),coord.getCol()+3);
         Coord CastlingWay2=new Coord(coord.getRow(),coord.getCol()-2);
         if(update(coord, CastlingWay1)){
@@ -40,6 +41,7 @@ public class KingMoveChecker implements MoveChecker {
         if(update(coord, CastlingWay2)){
             result.add(CastlingWay2);
         }
+
         for(int i=-1;i<=1;i++){
             for(int j=-1;j<=1;j++){
                 if(i==0&&j==0)

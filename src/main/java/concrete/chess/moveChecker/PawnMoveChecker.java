@@ -43,7 +43,7 @@ public class PawnMoveChecker implements MoveChecker {
             Piece pieceadd = BoardManager.getInstance().getBoardInstance().getPieceOn(coladd);
             Coord colsub=new Coord(coord.getRow(),coord.getCol()-1);//내 왼쪽
             Piece piecesub = BoardManager.getInstance().getBoardInstance().getPieceOn(colsub);
-            if(pieceadd==piece){   //최근 움직인 말이 내 오른쪽에 있다
+            if(pieceadd.equals(piece)){   //최근 움직인 말이 내 오른쪽에 있다
                 boolean existpast=false;    //과거에 움직인적이 있나요?
                 if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
                     Iterator<Record> it = History.getInstance().iterator();
@@ -61,7 +61,7 @@ public class PawnMoveChecker implements MoveChecker {
                     }
                 }
             }
-            if(piecesub==piece){   //최근 움직인 말이 내 왼쪽에 있다
+            if(piecesub.equals(piece)){   //최근 움직인 말이 내 왼쪽에 있다
                 boolean existpast=false;    //과거에 움직인적이 있나요?
                 if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
                     Iterator<Record> it = History.getInstance().iterator();
@@ -87,7 +87,7 @@ public class PawnMoveChecker implements MoveChecker {
             Piece pieceadd = BoardManager.getInstance().getBoardInstance().getPieceOn(coladd);
             Coord colsub=new Coord(coord.getRow(),coord.getCol()-1);//내 왼쪽
             Piece piecesub = BoardManager.getInstance().getBoardInstance().getPieceOn(colsub);
-            if(pieceadd==piece){   //최근 움직인 말이 내 오른쪽에 있다
+            if(pieceadd.equals(piece)){   //최근 움직인 말이 내 오른쪽에 있다
                 boolean existpast=false;    //과거에 움직인적이 있나요?
                 if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
                     Iterator<Record> it = History.getInstance().iterator();
@@ -105,7 +105,7 @@ public class PawnMoveChecker implements MoveChecker {
                     }
                 }
             }
-            if(piecesub==piece){   //최근 움직인 말이 내 왼쪽에 있다
+            if(piecesub.equals(piece)){   //최근 움직인 말이 내 왼쪽에 있다
                 boolean existpast=false;    //과거에 움직인적이 있나요?
                 if((ChessPieceEnum)piece.getType()==ChessPieceEnum.pawn) {//근데 그게 폰임
                     Iterator<Record> it = History.getInstance().iterator();
@@ -136,7 +136,7 @@ public class PawnMoveChecker implements MoveChecker {
             while(it.hasNext()){
                 //나
                 //그전의 기록에서 내가 있는지
-                if((it.next().getPiece().getId()==malice.getId())&& (it.next().getPiece().getPlayer()==1)) {//player1 의 내 폰 id
+                if((it.next().getPiece().getId()==malice.getId())&& (it.next().getPiece().getPlayer()==2)) {//player1 의 내 폰 id
                     existpast=true;
                     break;//처음 움직인게 아니랍니다
                 }
@@ -178,7 +178,7 @@ public class PawnMoveChecker implements MoveChecker {
             while(it.hasNext()){
                 //나
                 //그전의 기록에서 내가 있는지
-                if((it.next().getPiece().getId()==malice.getId())&& (it.next().getPiece().getPlayer()==2)) {//player2 의 내 폰 id
+                if((it.next().getPiece().getId()==malice.getId())&& (it.next().getPiece().getPlayer()==1)) {//player2 의 내 폰 id
                     existpast=true;
                     break;//처음 움직인게 아니랍니다
                 }

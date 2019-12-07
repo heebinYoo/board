@@ -92,7 +92,7 @@ public class ChessBoard extends Board {
             if(super.pieceData[post.getRow()][post.getCol()]!=null)
                 this.boardEventListner.onKilled(super.pieceData[post.getRow()][post.getCol()]);
             super.pieceData[post.getRow()][post.getCol()] = target;
-            //notifyObserver(prev, post);
+            notifyObserver(prev, post);
         }
         else{
             throw new InvaildMoveException(prev, post, target);
