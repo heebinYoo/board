@@ -1,6 +1,7 @@
 package concrete.chess.observer;
 
 import bean.Coord;
+import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.CheckChecker;
@@ -16,7 +17,7 @@ public class CheckmateObserver implements Observer {
     @Override
     public void update(Coord prev, Coord post) {
         if ((BoardManager.getInstance().getBoardInstance().getPieceOn(post) != null)&&(BoardManager.getInstance().getBoardInstance().getPieceOn(prev)!=null)){
-            if (!(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.king)) {
+            if(BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getType()==ChessPieceEnum.king){
                 CheckChecker check = new CheckChecker();
                 //checked check
                 if(check.isCheck(BoardManager.getInstance().getBoardInstance().getPieceOn(post),post)) {
@@ -39,10 +40,13 @@ public class CheckmateObserver implements Observer {
                         }
                     }
                 }
+                if((BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType()==ChessPieceEnum.king)&&(BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer()!=BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer())){
+                    //checkMate!!! exit
+                    boardEventListner.onGameOver();
+                }
             }
-
         }
-    }
+
 
     @Override
     public void setBoardEventListner(BoardEventListner boardEventListner) {
