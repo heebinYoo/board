@@ -118,11 +118,11 @@ public class ChessBoard extends Board {
     }
 
     @Override
-    public void setBoardEventListner(BoardEventListner boardEventListner) {
+    public void setBoardEventListener(BoardEventListner boardEventListner) {
         this.boardEventListner = boardEventListner;
         Iterator<Observer> iterator =  super.observerIterator();
         while(iterator.hasNext()){
-            iterator.next().setBoardEventListner(boardEventListner);
+            iterator.next().setBoardEventListener(boardEventListner);
         }
     }
 

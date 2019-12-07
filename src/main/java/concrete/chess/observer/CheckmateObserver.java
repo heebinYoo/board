@@ -60,7 +60,7 @@ public class CheckmateObserver implements Observer {
     }
 
     @Override
-    public void setBoardEventListner(BoardEventListner boardEventListner) {
+    public void setBoardEventListener(BoardEventListner boardEventListner) {
         this.boardEventListner=boardEventListner;
     }
 }

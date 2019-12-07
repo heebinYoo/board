@@ -5,7 +5,7 @@ import controller.BoardEventListner;
 
 public interface Observer {
     public void update(Coord prev, Coord post);
-    public void setBoardEventListner(BoardEventListner boardEventListner);
+    public void setBoardEventListener(BoardEventListner boardEventListner);
 
 
 

@@ -28,7 +28,7 @@ public abstract class Board implements Publisher{
        return pieceData[coord.getRow()][coord.getCol()];
     }
 
-    public abstract void setBoardEventListner(BoardEventListner boardEventListner);
+    public abstract void setBoardEventListener(BoardEventListner boardEventListner);
 
     @Override
     public void add(Observer observer) {

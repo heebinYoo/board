@@ -16,7 +16,7 @@ public class PromotionObserver implements Observer, SelectedListener {
     BoardEventListner boardEventListner;
 
     @Override
-    public void setBoardEventListner(BoardEventListner boardEventListner) {
+    public void setBoardEventListener(BoardEventListner boardEventListner) {
         this.boardEventListner = boardEventListner;
     }
 

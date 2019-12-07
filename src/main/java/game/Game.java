@@ -4,9 +4,6 @@ import bean.Coord;
 import board.Board;
 import board.BoardFactory;
 import board.BoardManager;
-import concrete.ConcreteBoardFactory;
-import concrete.ConcreteMoveCheckerFactory;
-import concrete.ConcretePieceFactory;
 import concrete.GameList;
 
 import controller.BoardEventListner;
@@ -80,7 +77,7 @@ public class Game{
     }
 
     public void setBoardEventListner(BoardEventListner boardEventListner){
-        BoardManager.getInstance().getBoardInstance().setBoardEventListner(boardEventListner);
+        BoardManager.getInstance().getBoardInstance().setBoardEventListener(boardEventListner);
     }
 
 
