@@ -2,9 +2,12 @@ package concrete;
 
 import concrete.chess.piece.ChessPieceEnum;
 import concrete.shogi.ShogiPieceEnum;
+import concrete.twelveJanggi.piece.TwelveJanggiPieceEnum;
 import piece.Piece;
 
 public class ResourceResolver {
+
+    /* Chess Data */
     private static final int BLACK =1;
     private static final int WHITE =2;
     //p1
@@ -22,13 +25,16 @@ public class ResourceResolver {
     private static final String WHITE_KNIGHT_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-knight.PNG";
     private static final String WHITE_PAWN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-pawn.PNG";
 
-
+    /* TwelveJanggi Data */
+    private static final int RED = 1;
+    private static final int Green = 2;
+    // TODO add icon data
 
     public static String resolveIcon(Piece piece){
-        if(piece.getType() instanceof ChessPieceEnum){
+        if(piece.getType() instanceof ChessPieceEnum) {
             ChessPieceEnum type = (ChessPieceEnum) piece.getType();
-            if(piece.getPlayer()==BLACK){
-                switch (type){
+            if (piece.getPlayer() == BLACK) {
+                switch (type) {
                     case pawn:
                         return BLACK_PAWN_ICON;
                     case bishop:
@@ -42,9 +48,8 @@ public class ResourceResolver {
                     case knight:
                         return BLACK_KNIGHT_ICON;
                 }
-            }
-            else if(piece.getPlayer()==WHITE){
-                switch (type){
+            } else if (piece.getPlayer() == WHITE) {
+                switch (type) {
                     case pawn:
                         return WHITE_PAWN_ICON;
                     case bishop:
@@ -69,6 +74,14 @@ public class ResourceResolver {
 
             }
 
+        }
+        else if (piece.getType() instanceof TwelveJanggiPieceEnum){
+            if(piece.getPlayer()==1){
+
+            }
+            else{
+
+            }
         }
         throw new IllegalArgumentException();
     }
