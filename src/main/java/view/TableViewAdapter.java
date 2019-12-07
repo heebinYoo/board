@@ -29,10 +29,12 @@ public class TableViewAdapter implements TableItemEventLister {
 
         public TableViewHolder(Coord coord, TableItemEventLister tableItemEventLister){
             super(new BorderLayout(), true);
+
+
+            imgBtn.setBackground(new Color(180,150,50));
             this.coord=coord;
 
             imgBtn.setBorderPainted(false);
-            imgBtn.setContentAreaFilled(false);
             imgBtn.setFocusPainted(false);
             imgBtn.addActionListener(new ActionListener() {
                 @Override

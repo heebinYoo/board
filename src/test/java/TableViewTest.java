@@ -35,16 +35,16 @@ public class TableViewTest {
 
     @Test
     public void testInflate(){
-        Game game = new Game(GameList.chess,new ConcreteBoardFactory());
-
-        TestClickListener tableClickListener = new TestClickListener();
-
-        lastMoveableList = new ArrayList<>();
-        lastMoveableList.add(new Coord(0, 0));
-        lastMoveableList.add(new Coord(2,2));
-        lastMoveableList.add(new Coord(0, 1));
-
-        new TableView(new TableViewAdapter(BoardManager.getInstance().getBoardInstance())).setTableClickListener(tableClickListener);
+//        Game game = new Game(GameList.chess,new ConcreteBoardFactory());
+//
+//        TestClickListener tableClickListener = new TestClickListener();
+//
+//        lastMoveableList = new ArrayList<>();
+//        lastMoveableList.add(new Coord(0, 0));
+//        lastMoveableList.add(new Coord(2,2));
+//        lastMoveableList.add(new Coord(0, 1));
+//
+//        new TableView(new TableViewAdapter(BoardManager.getInstance().getBoardInstance())).setTableClickListener(tableClickListener);
 
         while(true){
 

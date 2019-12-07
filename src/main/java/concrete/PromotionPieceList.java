@@ -13,10 +13,10 @@ public class PromotionPieceList extends ArrayList<Piece> {
         pieceFactory = new ConcretePieceFactory();
         switch (gameType){
             case chess:
-                this.add(pieceFactory.createPiece(player, ChessPieceEnum.queen));
-                this.add(pieceFactory.createPiece(player, ChessPieceEnum.bishop));
-                this.add(pieceFactory.createPiece(player, ChessPieceEnum.knight));
-                this.add(pieceFactory.createPiece(player, ChessPieceEnum.rukh));
+                this.add(pieceFactory.createPiece(player, ChessPieceEnum.queen, "?"));
+                this.add(pieceFactory.createPiece(player, ChessPieceEnum.bishop, "?"));
+                this.add(pieceFactory.createPiece(player, ChessPieceEnum.knight, "?"));
+                this.add(pieceFactory.createPiece(player, ChessPieceEnum.rukh, "?"));
                 break;
             case shogi:
          //TODO

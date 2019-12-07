@@ -20,6 +20,7 @@ public class History {
 
     public void add(Record record){}
     public Record getLast(){
+        if(records.size()==0) return null;
         return records.get(records.size()-1);
     }
     public Iterator<Record> iterator(){

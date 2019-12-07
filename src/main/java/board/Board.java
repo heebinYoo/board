@@ -14,7 +14,7 @@ public abstract class Board implements Publisher{
     protected abstract void init();
 
     public abstract void update(Coord prev, Coord post) throws InvaildMoveException;
-
+    public abstract void update(Piece piece, Coord coord);
     public Board(Game.Accessor accessor){
         observers = new ArrayList<>();
         init();

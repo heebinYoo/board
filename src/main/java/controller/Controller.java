@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Coord;
-import concrete.ConcretePieceFactory;
 import concrete.PromotionPieceList;
 import game.Game;
 import org.slf4j.Logger;
@@ -27,13 +26,13 @@ public class Controller implements TableClickListener{
     private ListClickListener killedListView1Listener = new ListClickListener() {
         @Override
         public void onClick(JPanel jPanel, int position) {
-            killed1.get(position);
+            fromKilledList = killed1.get(position);
         }
     };
     private ListClickListener killedListView2Listener = new ListClickListener() {
         @Override
         public void onClick(JPanel jPanel, int position) {
-            killed2.get(position);
+            fromKilledList = killed2.get(position);
         }
     };
     private ListClickListener promotionView1Listener = new ListClickListener() {
@@ -49,6 +48,10 @@ public class Controller implements TableClickListener{
         }
     };
     private ArrayList<Piece> killed1, killed2;
+
+    private ArrayList<Coord> movableList = null;
+    private Piece fromKilledList = null;
+    private Coord postCoord = null;
 
     /* Constructor */
     public Controller(Game game, TableView tableView){
@@ -88,9 +91,39 @@ public class Controller implements TableClickListener{
         killedListView2.setLocation(location + size, location + size/2);
     }
 
+    private boolean checkMovableList(Coord coord){
+        if(movableList != null) {
+            for (Coord point : movableList) {
+                if (point.getRow() == coord.getRow() && point.getCol() == coord.getCol()) return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onClick(JPanel jPanel, Coord coord) {
         logger.debug("data on "+coord + " piece data ");
-
+        if(game.getPiece(coord) == null){
+            if(fromKilledList == null){
+                if(checkMovableList(coord)) game.update(postCoord, coord);
+                tableView.notifyUpdated();
+                movableList = null; fromKilledList = null;
+            }else{
+                game.update(fromKilledList, coord);
+                tableView.notifyUpdated();
+                movableList = null; fromKilledList = null;
+            }
+        }else{
+            if(game.click(coord)){
+                movableList = game.getMoveableList(coord);
+                tableView.drawMoveablePoint(movableList);
+                fromKilledList = null;
+            }else{
+                if(checkMovableList(coord)) game.update(postCoord, coord);
+                tableView.notifyUpdated();
+                movableList = null; fromKilledList = null;
+            }
+        }
+        postCoord = coord;
     }
 }

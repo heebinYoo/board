@@ -22,6 +22,12 @@ public class ResourceResolver {
     private static final String WHITE_KNIGHT_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
     private static final String WHITE_PAWN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
 
+    private static final String AIM = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\pointed.PNG";
+
+    public static String getAIM() {
+        return AIM;
+    }
+
     public static String resolveIcon(Piece piece){
         if(piece.getType() instanceof ChessPieceEnum){
             ChessPieceEnum type = (ChessPieceEnum) piece.getType();
