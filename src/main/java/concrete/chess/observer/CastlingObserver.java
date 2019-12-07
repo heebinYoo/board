@@ -5,6 +5,7 @@ import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPiece;
 import concrete.chess.piece.ChessPieceEnum;
+import controller.BoardEventListner;
 import exception.InvaildMoveException;
 import history.History;
 import history.Record;
@@ -105,6 +106,11 @@ public class CastlingObserver implements Observer {
             }
 
         }
+
+    }
+
+    @Override
+    public void setBoardEventListner(BoardEventListner boardEventListner) {
 
     }
 }

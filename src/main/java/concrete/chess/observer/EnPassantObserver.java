@@ -5,6 +5,7 @@ import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
+import controller.BoardEventListner;
 import history.History;
 import history.Record;
 import observer.Observer;
@@ -42,6 +43,11 @@ public class EnPassantObserver implements Observer {
 
             }
         }
+
+    }
+
+    @Override
+    public void setBoardEventListner(BoardEventListner boardEventListner) {
 
     }
 }

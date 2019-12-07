@@ -166,4 +166,9 @@ public class Controller implements TableClickListener, BoardEventListner{
         }
 
     }
+
+    @Override
+    public void onGameOver() {
+        tableView.removeAll();
+    }
 }

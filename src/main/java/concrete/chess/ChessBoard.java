@@ -122,10 +122,7 @@ public class ChessBoard extends Board {
         this.boardEventListner = boardEventListner;
         Iterator<Observer> iterator =  super.observerIterator();
         while(iterator.hasNext()){
-            Observer temp = iterator.next();
-            if(temp instanceof PromotionObserver){
-                ((PromotionObserver) temp).setBoardEventListner(boardEventListner);
-            }
+            iterator.next().setBoardEventListner(boardEventListner);
         }
     }
 

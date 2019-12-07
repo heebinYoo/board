@@ -4,12 +4,14 @@ import bean.Coord;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
+import controller.BoardEventListner;
 import observer.Observer;
 
 import java.util.ArrayList;
 
 public class CheckmateObserver implements Observer {
     private ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
+    private BoardEventListner boardEventListner;
     @Override
     public void update(Coord prev, Coord post) {
         if(!(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.king)){
@@ -41,7 +43,7 @@ public class CheckmateObserver implements Observer {
 
                    if(KingLoc.size()==0){
                        //CheckMate!!! exit
-                       //TODO
+                       boardEventListner.onGameOver();
                    }
 
                }
@@ -49,5 +51,10 @@ public class CheckmateObserver implements Observer {
 
         }
 
+    }
+
+    @Override
+    public void setBoardEventListner(BoardEventListner boardEventListner) {
+        this.boardEventListner=boardEventListner;
     }
 }

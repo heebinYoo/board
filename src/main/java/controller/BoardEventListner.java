@@ -6,4 +6,5 @@ import piece.Piece;
 public interface BoardEventListner {
     public void onKilled(Piece piece);
     public void onPromoted(Piece piece, SelectedListener selectedListener);
+    public void onGameOver();
 }
