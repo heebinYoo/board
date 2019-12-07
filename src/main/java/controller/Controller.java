@@ -92,8 +92,10 @@ public class Controller implements TableClickListener{
     }
 
     private boolean checkMovableList(Coord coord){
-        for(Coord point : movableList){
-            if(point.getRow() == coord.getRow() && point.getCol() == coord.getCol())return true;
+        if(movableList != null) {
+            for (Coord point : movableList) {
+                if (point.getRow() == coord.getRow() && point.getCol() == coord.getCol()) return true;
+            }
         }
         return false;
     }
@@ -104,17 +106,21 @@ public class Controller implements TableClickListener{
         if(game.getPiece(coord) == null){
             if(fromKilledList == null){
                 if(checkMovableList(coord)) game.update(postCoord, coord);
+                tableView.notifyUpdated();
                 movableList = null; fromKilledList = null;
             }else{
                 game.update(fromKilledList, coord);
+                tableView.notifyUpdated();
                 movableList = null; fromKilledList = null;
             }
         }else{
             if(game.click(coord)){
                 movableList = game.getMoveableList(coord);
+                tableView.drawMoveablePoint(movableList);
                 fromKilledList = null;
             }else{
                 if(checkMovableList(coord)) game.update(postCoord, coord);
+                tableView.notifyUpdated();
                 movableList = null; fromKilledList = null;
             }
         }

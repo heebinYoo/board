@@ -92,9 +92,14 @@ public class ChessBoard extends Board {
             throw new InvaildMoveException(prev, post, target);
         }
 
-
-
     }
+
+    @Override
+    public void update(Piece piece, Coord coord) {
+        Piece target = piece;
+        super.pieceData[coord.getRow()][coord.getCol()] = target;
+    }
+
     private boolean checkSafe(Coord prev, Coord post, Piece target){
         MoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
         return moveCheckerFactory.createMoveChecker(target).moveableCheck(prev,post);

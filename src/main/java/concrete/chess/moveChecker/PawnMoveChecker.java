@@ -25,7 +25,14 @@ public class PawnMoveChecker implements MoveChecker {
 
 
         Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(coord);
-        Piece piece=History.getInstance().getLast().getPiece();
+        Piece piece;
+        try{
+            piece=History.getInstance().getLast().getPiece();
+        }
+        catch (NullPointerException e){
+            piece=null;
+        }
+
         //piece.
 
 

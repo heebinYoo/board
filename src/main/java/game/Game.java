@@ -8,6 +8,7 @@ import concrete.ConcreteBoardFactory;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
 import concrete.GameList;
+
 import exception.InvaildMoveException;
 import history.History;
 import history.Record;
@@ -74,7 +75,8 @@ public class Game {
         }
     }
     public void update(Piece piece, Coord coord){
-
+        BoardManager.getInstance().getBoardInstance().update(piece,coord);
+        turn = turn==1 ? 2 : 1;
     }
 
     public Board getBoard() {

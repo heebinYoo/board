@@ -1,6 +1,7 @@
 package view;
 
 import bean.Coord;
+import concrete.ResourceResolver;
 import controller.TableClickListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +18,16 @@ public class TableView extends JFrame {
     private TableClickListener tableClickListener;
     private TableViewAdapter tableViewAdapter;
     private JPanel mainPanel;
+
+    private final int boardRow;
+    private final int boardCol;
+
     /* Constructor */
     public TableView(TableViewAdapter tableViewAdapter) throws HeadlessException{
         super("TableView");
+        boardRow=tableViewAdapter.getItemCount().getRow();
+        boardCol=tableViewAdapter.getItemCount().getCol();
+
         GridLayout layout = new GridLayout(tableViewAdapter.getItemCount().getRow(), tableViewAdapter.getItemCount().getCol());
         mainPanel = new JPanel(layout);
         this.tableViewAdapter = tableViewAdapter;
@@ -40,7 +48,10 @@ public class TableView extends JFrame {
     }
 
     public void notifyUpdated(){
-        mainPanel.removeAll();
+        for (Component component : mainPanel.getComponents()) {
+            mainPanel.remove(component);
+        }
+
         for(int i = 0; i<tableViewAdapter.getItemCount().getRow(); i++)
             for(int j=0;j<tableViewAdapter.getItemCount().getCol();j++){
                 Coord coord = new Coord(i,j);
@@ -53,10 +64,18 @@ public class TableView extends JFrame {
 
     public void drawMoveablePoint(ArrayList<Coord> coords){
         this.notifyUpdated();
+
         coords.forEach(coord -> {
-            this.getComponentAt(coord.getRow(), coord.getCol()).setBackground(new Color(255, 0, 0, 255));
+           TableViewAdapter.TableViewHolder tableViewHolder = (TableViewAdapter.TableViewHolder) mainPanel.getComponent(coord.getRow()*boardCol+coord.getCol());
+            tableViewHolder.setImgBtn(ResourceResolver.getAIM());
+
         });
+
+        this.invalidate();
         this.repaint();
+        this.revalidate();
+
+        System.out.println("d");
     }
 
     public void setTableClickListener(TableClickListener tableClickListener){

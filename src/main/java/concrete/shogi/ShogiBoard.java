@@ -3,6 +3,7 @@ package concrete.shogi;
 import bean.Coord;
 import board.Board;
 import game.Game;
+import piece.Piece;
 
 public class ShogiBoard extends Board {
     public ShogiBoard(Game.Accessor accessor){
@@ -15,6 +16,11 @@ public class ShogiBoard extends Board {
 
     @Override
     public void update(Coord prev, Coord post) {
+
+    }
+
+    @Override
+    public void update(Piece piece, Coord coord) {
 
     }
 }
