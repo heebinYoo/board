@@ -67,15 +67,17 @@ public class CastlingObserver implements Observer {
                     for (int i = 0; i < 8; i++) {
                         for (int j = 0; j < 8; j++) {
                             Coord Board = new Coord(i, j);
-                            if (BoardManager.getInstance().getBoardInstance().getPieceOn(Board).getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) {
-                                ArrayList<Coord> obs = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(Board)).getMoveableList(Board);
-                                for (int k = 0; k < obs.size(); k++) {
-                                    for (int l = 0; l < KingsWay.size(); l++) {
-                                        if (obs.get(k) == KingsWay.get(l)) {
-                                            return; //there will be some attack to king -> not castling
-                                        }
-                                        if (obs.get(k) == post) {
-                                            return; //there will be some attack to king -> not castling
+                            if (BoardManager.getInstance().getBoardInstance().getPieceOn(Board).getType() != null) {
+                                if (BoardManager.getInstance().getBoardInstance().getPieceOn(Board).getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer()) {
+                                    ArrayList<Coord> obs = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(Board)).getMoveableList(Board);
+                                    for (int k = 0; k < obs.size(); k++) {
+                                        for (int l = 0; l < KingsWay.size(); l++) {
+                                            if (obs.get(k) == KingsWay.get(l)) {
+                                                return; //there will be some attack to king -> not castling
+                                            }
+                                            if (obs.get(k) == post) {
+                                                return; //there will be some attack to king -> not castling
+                                            }
                                         }
                                     }
                                 }

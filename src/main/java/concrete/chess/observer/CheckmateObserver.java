@@ -25,14 +25,16 @@ public class CheckmateObserver implements Observer {
                        for(int k = 0;k<8;k++){
                            for(int l = 0; l<8;l++) {
                                Coord BoardCoord = new Coord(k, l);
-                               if(BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord).getPlayer()!=BoardManager.getInstance().getBoardInstance().getPieceOn(KingLoc.get(j)).getPlayer()) {
-                                   ArrayList<Coord> CheckedOrNot = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord)).getMoveableList(BoardCoord);
-                                   for(int m = 0;m<KingLoc.size();m++){
-                                       for(int n = 0;n<CheckedOrNot.size();n++){
-                                           if(KingLoc.get(m)==CheckedOrNot.get(n)) {
-                                               //Cannot move to here
-                                               KingLoc.remove(m);
-                                               break;
+                               if(BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord).getType()!=null) {
+                                   if (BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord).getPlayer() != BoardManager.getInstance().getBoardInstance().getPieceOn(KingLoc.get(j)).getPlayer()) {
+                                       ArrayList<Coord> CheckedOrNot = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(BoardCoord)).getMoveableList(BoardCoord);
+                                       for (int m = 0; m < KingLoc.size(); m++) {
+                                           for (int n = 0; n < CheckedOrNot.size(); n++) {
+                                               if (KingLoc.get(m) == CheckedOrNot.get(n)) {
+                                                   //Cannot move to here
+                                                   KingLoc.remove(m);
+                                                   break;
+                                               }
                                            }
                                        }
                                    }
