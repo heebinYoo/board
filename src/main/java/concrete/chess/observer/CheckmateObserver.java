@@ -3,6 +3,7 @@ package concrete.chess.observer;
 import bean.Coord;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
+import concrete.chess.CheckChecker;
 import concrete.chess.piece.ChessPieceEnum;
 import controller.BoardEventListner;
 import observer.Observer;
@@ -19,6 +20,7 @@ public class CheckmateObserver implements Observer {
 
                 ArrayList<Coord> isKingThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(post)).getMoveableList(post);
                 //checked check
+                //if(CheckChecker.isCheck(BoardManager.getInstance().getBoardInstance().getPieceOn(post),post))
                 for (int i = 0; i < isKingThere.size(); i++) {
                     if(BoardManager.getInstance().getBoardInstance().getPieceOn(isKingThere.get(i))!=null) {
                         if (BoardManager.getInstance().getBoardInstance().getPieceOn(isKingThere.get(i)).getType() == ChessPieceEnum.king) {
