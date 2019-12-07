@@ -8,25 +8,21 @@ public class ResourceResolver {
     private static final int BLACK =1;
     private static final int WHITE =2;
     //p1
-    private static final String BLACK_KING_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String BLACK_QUEEN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String BLACK_RUKH_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String BLACK_BISHOP_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String BLACK_KNIGHT_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String BLACK_PAWN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
+    private static final String BLACK_KING_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\black-king.PNG";
+    private static final String BLACK_QUEEN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\black-queen.PNG";
+    private static final String BLACK_RUKH_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\black-rukh.PNG";
+    private static final String BLACK_BISHOP_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\black-bishop.PNG";
+    private static final String BLACK_KNIGHT_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\black-knight.PNG";
+    private static final String BLACK_PAWN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\black-pawn.PNG";
     //p2
-    private static final String WHITE_KING_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String WHITE_QUEEN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String WHITE_RUKH_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String WHITE_BISHOP_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String WHITE_KNIGHT_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
-    private static final String WHITE_PAWN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\queen.PNG";
+    private static final String WHITE_KING_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-king.PNG";
+    private static final String WHITE_QUEEN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-queen.PNG";
+    private static final String WHITE_RUKH_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-rukh.PNG";
+    private static final String WHITE_BISHOP_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-bishop.PNG";
+    private static final String WHITE_KNIGHT_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-knight.PNG";
+    private static final String WHITE_PAWN_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\white-pawn.PNG";
 
-    private static final String AIM = System.getProperty("user.dir") + "\\src\\main\\resources\\chess\\icon\\pointed.PNG";
 
-    public static String getAIM() {
-        return AIM;
-    }
 
     public static String resolveIcon(Piece piece){
         if(piece.getType() instanceof ChessPieceEnum){

@@ -30,8 +30,6 @@ public class TableViewAdapter implements TableItemEventLister {
         public TableViewHolder(Coord coord, TableItemEventLister tableItemEventLister){
             super(new BorderLayout(), true);
 
-
-            imgBtn.setBackground(new Color(180,150,50));
             this.coord=coord;
 
             imgBtn.setBorderPainted(false);
@@ -44,7 +42,9 @@ public class TableViewAdapter implements TableItemEventLister {
             });
             this.add(imgBtn);
         }
-
+        public void setSlected(){
+            imgBtn.setBackground(new Color(180,150,50));
+        }
         public void setImgBtn(String filename){
             imgBtn.setIcon(new ImageIcon(filename));
         }

@@ -67,7 +67,7 @@ public class TableView extends JFrame {
 
         coords.forEach(coord -> {
            TableViewAdapter.TableViewHolder tableViewHolder = (TableViewAdapter.TableViewHolder) mainPanel.getComponent(coord.getRow()*boardCol+coord.getCol());
-            tableViewHolder.setImgBtn(ResourceResolver.getAIM());
+           tableViewHolder.setSlected();
 
         });
 
