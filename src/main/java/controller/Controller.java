@@ -115,7 +115,8 @@ public class Controller implements TableClickListener, BoardEventListner{
         logger.debug("data on "+coord + " piece data ");
         if(game.getPiece(coord) == null){
             if(fromKilledList == null){
-                if(checkMovableList(coord)) game.update(postCoord, coord);
+                if(checkMovableList(coord))
+                    game.update(postCoord, coord);
                 tableView.notifyUpdated();
                 movableList = null; fromKilledList = null;
             }else{
@@ -129,7 +130,8 @@ public class Controller implements TableClickListener, BoardEventListner{
                 tableView.drawMoveablePoint(movableList);
                 fromKilledList = null;
             }else{
-                if(checkMovableList(coord)) game.update(postCoord, coord);
+                if(checkMovableList(coord))
+                    game.update(postCoord, coord);
                 tableView.notifyUpdated();
                 movableList = null; fromKilledList = null;
             }
