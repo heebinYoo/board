@@ -31,8 +31,11 @@ public class PawnMoveChecker implements MoveChecker {
 
         //앙파상 조건1 player1->row4 조건2 최근 상대 폰->내 양옆에 위치.
         Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(coord); //나
-        Piece piece=History.getInstance().getLast().getPiece(); //최근 상대
-        //piece.
+        Piece piece;
+        if(History.getInstance().getLast()!=null){
+            piece=History.getInstance().getLast().getPiece(); //최근 상대
+        }
+        piece=null;
 
 
         if(malice.getPlayer()==1&&coord.getRow()==4){  //내가 player1 이고 앙파상의 조건1이 만족
@@ -221,10 +224,10 @@ public class PawnMoveChecker implements MoveChecker {
         //없으면 false
         //list 있으면 true
 
-        ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        ArrayList<Coord> isBishopThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(prev)).getMoveableList(prev);
-        for (int i = 0; i < isBishopThere.size(); i++) {
-            if (isBishopThere.get(i).getRow()==post.getRow()&&isBishopThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
+
+        ArrayList<Coord> isPawnThere = this.getMoveableList(prev);
+        for (int i = 0; i < isPawnThere.size(); i++) {
+            if (isPawnThere.get(i).getRow()==post.getRow()&&isPawnThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
                 return true;
             }
         }

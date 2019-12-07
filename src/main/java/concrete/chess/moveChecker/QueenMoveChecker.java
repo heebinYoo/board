@@ -163,10 +163,10 @@ public class QueenMoveChecker implements MoveChecker {
         //없으면 false
         //list 있으면 true
 
-        ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        ArrayList<Coord> isBishopThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(prev)).getMoveableList(prev);
-        for (int i = 0; i < isBishopThere.size(); i++) {
-            if (isBishopThere.get(i).getRow()==post.getRow()&&isBishopThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
+
+        ArrayList<Coord> isQueenThere = this.getMoveableList(prev);
+        for (int i = 0; i < isQueenThere.size(); i++) {
+            if (isQueenThere.get(i).getRow()==post.getRow()&&isQueenThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
                 return true;
             }
         }
