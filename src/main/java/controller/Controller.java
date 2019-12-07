@@ -41,16 +41,15 @@ public class Controller implements TableClickListener, BoardEventListner{
         public void onClick(JPanel jPanel, int position) {
             promotionView1.setVisible(false);
             selectedListener.onSelect(new PromotionPieceList(game.getGameType(),1).get(position));
-
-
+            tableView.notifyUpdated();
         }
     };
     private ListClickListener promotionView2Listener = new ListClickListener() {
         @Override
         public void onClick(JPanel jPanel, int position) {
             promotionView1.setVisible(false);
-
             selectedListener.onSelect(new PromotionPieceList(game.getGameType(),2).get(position));
+            tableView.notifyUpdated();
         }
     };
     private ArrayList<Piece> killed1, killed2;
@@ -162,9 +161,11 @@ public class Controller implements TableClickListener, BoardEventListner{
             case 1:
                 promotionView1.setVisible(true);
                 promotionView1.requestFocus();
+                break;
             case 2:
                 promotionView2.setVisible(true);
                 promotionView2.requestFocus();
+                break;
         }
 
     }

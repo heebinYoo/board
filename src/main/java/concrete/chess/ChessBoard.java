@@ -8,6 +8,7 @@ import concrete.ConcretePieceFactory;
 import concrete.chess.observer.*;
 import concrete.chess.piece.ChessPieceEnum;
 import controller.BoardEventListner;
+import controller.Controller;
 import exception.InvaildMoveException;
 
 import game.Game;
@@ -106,7 +107,10 @@ public class ChessBoard extends Board {
 
     @Override
     public void update(Piece piece, Coord coord) {
-
+        if(piece.getType()!=ChessPieceEnum.pawn){
+            if( piece.getId().indexOf('0')==-1 && piece.getId().indexOf('1')==-1 )
+                super.pieceData[coord.getRow()][coord.getCol()] = piece;
+        }
     }
 
     @Override
@@ -128,6 +132,5 @@ public class ChessBoard extends Board {
             iterator.next().setBoardEventListner(boardEventListner);
         }
     }
-
 
 }
