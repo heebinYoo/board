@@ -37,7 +37,7 @@ public class EnPassantObserver implements Observer {
                     }
                     if(i==1){
                         //EnPassant Check
-                        //TODO
+                        BoardManager.getInstance().getBoardInstance().kill(History.getInstance().getLast().getPrev());
                     }
                 }
 

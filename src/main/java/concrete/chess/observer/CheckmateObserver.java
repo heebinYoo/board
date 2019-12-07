@@ -32,7 +32,7 @@ public class CheckmateObserver implements Observer {
                                            if(KingLoc.get(m)==CheckedOrNot.get(n)) {
                                                //Cannot move to here
                                                KingLoc.remove(m);
-                                               return;
+                                               break;
                                            }
                                        }
                                    }
