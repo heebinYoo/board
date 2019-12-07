@@ -10,7 +10,7 @@ import java.util.ArrayList;
 //TODO
 public class RukhMoveChecker implements MoveChecker {
     @Override
-public ArrayList<Coord> getMoveableList(Coord coord) {
+    public ArrayList<Coord> getMoveableList(Coord coord) {
     ArrayList<Coord> result = new ArrayList<Coord>();
 
 
@@ -102,9 +102,9 @@ public ArrayList<Coord> getMoveableList(Coord coord) {
         //list 있으면 true
 
         ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        ArrayList<Coord> isBishopThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(prev)).getMoveableList(prev);
-        for (int i = 0; i < isBishopThere.size(); i++) {
-            if (isBishopThere.get(i).getRow()==post.getRow()&&isBishopThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
+        ArrayList<Coord> isRukhThere = this.getMoveableList(prev);
+        for (int i = 0; i < isRukhThere.size(); i++) {
+            if (isRukhThere.get(i).getRow()==post.getRow()&&isRukhThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
                 return true;
             }
         }

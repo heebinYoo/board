@@ -98,7 +98,7 @@ public class BishopMoveChecker implements MoveChecker {
         //list 있으면 true
 
         ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        ArrayList<Coord> isBishopThere = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(prev)).getMoveableList(prev);
+        ArrayList<Coord> isBishopThere = this.getMoveableList(prev);
         for (int i = 0; i < isBishopThere.size(); i++) {
             if (isBishopThere.get(i).getRow()==post.getRow()&&isBishopThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
                 return true;
