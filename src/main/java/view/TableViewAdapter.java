@@ -32,7 +32,6 @@ public class TableViewAdapter implements TableItemEventLister {
 
             this.coord=coord;
 
-            imgBtn.setBorderPainted(false);
             imgBtn.setFocusPainted(false);
             imgBtn.addActionListener(new ActionListener() {
                 @Override
