@@ -2,8 +2,11 @@ package concrete;
 
 import concrete.chess.piece.ChessPieceEnum;
 import concrete.shogi.ShogiPieceEnum;
+import concrete.twelveJanggi.TwelveJanggiBoard;
 import concrete.twelveJanggi.piece.TwelveJanggiPieceEnum;
 import piece.Piece;
+
+import static concrete.twelveJanggi.piece.TwelveJanggiPieceEnum.*;
 
 public class ResourceResolver {
 
@@ -28,7 +31,18 @@ public class ResourceResolver {
     /* TwelveJanggi Data */
     private static final int RED = 1;
     private static final int Green = 2;
-    // TODO add icon data
+    //p1
+    private static final String RED_JANG_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\red-jang.PNG";
+    private static final String RED_SANG_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\red-sang.PNG";
+    private static final String RED_WANG_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\red-wang.PNG";
+    private static final String RED_ZA_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\red-za.PNG";
+    private static final String RED_HU_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\red-hu.PNG";
+    //p2
+    private static final String GREEN_JANG_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\green-jang.PNG";
+    private static final String GREEN_SANG_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\green-sang.PNG";
+    private static final String GREEN_WANG_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\green-wang.PNG";
+    private static final String GREEN_ZA_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\green-za.PNG";
+    private static final String GREEN_HU_ICON = System.getProperty("user.dir") + "\\src\\main\\resources\\twelveJanggi\\icon\\green-hu.PNG";
 
     public static String resolveIcon(Piece piece){
         if(piece.getType() instanceof ChessPieceEnum) {
@@ -76,11 +90,34 @@ public class ResourceResolver {
 
         }
         else if (piece.getType() instanceof TwelveJanggiPieceEnum){
+            TwelveJanggiPieceEnum type = (TwelveJanggiPieceEnum) piece.getType();
             if(piece.getPlayer()==1){
-
+                switch (type){
+                    case jang:
+                        return RED_JANG_ICON;
+                    case sang:
+                        return RED_SANG_ICON;
+                    case wang:
+                        return RED_WANG_ICON;
+                    case za:
+                        return RED_ZA_ICON;
+                    case hu:
+                        return RED_HU_ICON;
+                }
             }
             else{
-
+                switch (type) {
+                    case jang:
+                        return GREEN_JANG_ICON;
+                    case sang:
+                        return GREEN_SANG_ICON;
+                    case wang:
+                        return GREEN_WANG_ICON;
+                    case za:
+                        return GREEN_ZA_ICON;
+                    case hu:
+                        return GREEN_HU_ICON;
+                }
             }
         }
         throw new IllegalArgumentException();

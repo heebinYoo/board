@@ -20,6 +20,7 @@ public class ZaMoveChecker extends CheckerBundle implements MoveChecker {
             if(movableCheck(coord, new Coord(coord.getRow(), coord.getCol()-1))) movableList.add(new Coord(coord.getRow(), coord.getCol()-1));
         }
 
+        return movableList;
     }
 
     @Override
