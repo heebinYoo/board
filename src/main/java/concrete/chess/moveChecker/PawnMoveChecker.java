@@ -150,13 +150,14 @@ public class PawnMoveChecker implements MoveChecker {
                 //나
                 //그전의 기록에서 내가 있는지
                 Piece piecepawn = it.next().getPiece();
-                if((piecepawn.getId()==malice.getId())&& (piecepawn.getPlayer()==1)) {//player1 의 내 폰 id
+                if(piecepawn.getType() == malice.getType() && (piecepawn.getId()==malice.getId())&& (piecepawn.getPlayer()==1)) {//player1 의 내 폰 id
                     existpast=true;
                     break;//처음 움직인게 아니랍니다
                 }
             }
             if(existpast==false) {//처음움직인거래
                 Coord iwanttogo = new Coord(coord.getRow() + 2, coord.getCol()); //그럼 앞2칸 추가
+                if(BoardManager.getInstance().getBoardInstance().getPieceOn(iwanttogo)==null||BoardManager.getInstance().getBoardInstance().getPieceOn(iwanttogo).getPlayer()!=malice.getPlayer())
                 result.add(iwanttogo); //그 뒤쪽으로 갈 수 있다
             }
             //1.
@@ -193,13 +194,14 @@ public class PawnMoveChecker implements MoveChecker {
                 //나
                 //그전의 기록에서 내가 있는지
                 Piece piecepawn = it.next().getPiece();
-                if((piecepawn.getId()==malice.getId())&& (piecepawn.getPlayer()==2)) {//player2 의 내 폰 id
+                if((piecepawn.getType() == malice.getType() && piecepawn.getId()==malice.getId())&& (piecepawn.getPlayer()==2)) {//player2 의 내 폰 id
                     existpast=true;
                     break;//처음 움직인게 아니랍니다
                 }
             }
             if(existpast==false) {//처음움직인거래
                 Coord iwanttogo = new Coord(coord.getRow() -2, coord.getCol()); //그럼 앞2칸 추가
+                if(BoardManager.getInstance().getBoardInstance().getPieceOn(iwanttogo)==null||BoardManager.getInstance().getBoardInstance().getPieceOn(iwanttogo).getPlayer()!=malice.getPlayer())
                 result.add(iwanttogo); //그 뒤쪽으로 갈 수 있다
             }
             //1.
