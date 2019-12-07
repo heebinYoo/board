@@ -9,6 +9,7 @@ import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
 import concrete.GameList;
 
+import controller.BoardEventListner;
 import exception.InvaildMoveException;
 import history.History;
 import history.Record;
@@ -17,9 +18,7 @@ import piece.Piece;
 
 import java.util.ArrayList;
 
-public class Game {
-
-
+public class Game{
 
     /* Accessor for Board init */
     public static final class Accessor{
@@ -78,6 +77,11 @@ public class Game {
         BoardManager.getInstance().getBoardInstance().update(piece,coord);
         turn = turn==1 ? 2 : 1;
     }
+
+    public void setBoardEventListner(BoardEventListner boardEventListner){
+        BoardManager.getInstance().getBoardInstance().setBoardEventListner(boardEventListner);
+    }
+
 
     public Board getBoard() {
         return BoardManager.getInstance().getBoardInstance();

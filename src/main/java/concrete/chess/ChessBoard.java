@@ -10,26 +10,29 @@ import concrete.chess.observer.CheckmateObserver;
 import concrete.chess.observer.EnPassantObserver;
 import concrete.chess.observer.PromotionObserver;
 import concrete.chess.piece.ChessPieceEnum;
+import controller.BoardEventListner;
 import exception.InvaildMoveException;
 
 import game.Game;
-import history.History;
-import history.Record;
 import moveChecker.MoveCheckerFactory;
+import observer.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import piece.Piece;
 import piece.PieceFactory;
+
+import java.util.Iterator;
 
 public class ChessBoard extends Board {
     static final Logger logger = LoggerFactory.getLogger(ChessBoard.class);
 
     private final int BLACK = 1;
     private final int WHITE = 2;
-
+    private BoardEventListner boardEventListner;
     public ChessBoard(Game.Accessor accessor){
         super(accessor);
     }
+
 
     //0,0 black-p1 ruke
     //7,7 white-p2 ruke
@@ -84,7 +87,10 @@ public class ChessBoard extends Board {
     public void update(Coord prev, Coord post) throws InvaildMoveException {
         Piece target = BoardManager.getInstance().getBoardInstance().getPieceOn(prev);
         if(checkSafe(prev,post,target)) {
-            super.pieceData[prev.getRow()][prev.getCol()] = null;
+            if(super.pieceData[prev.getRow()][prev.getCol()]!=null){
+                this.boardEventListner.onKilled(super.pieceData[prev.getRow()][prev.getCol()]);
+                super.pieceData[prev.getRow()][prev.getCol()] = null;
+            }
             super.pieceData[post.getRow()][prev.getCol()] = target;
             notifyObserver(prev, post);
         }
@@ -100,9 +106,27 @@ public class ChessBoard extends Board {
         super.pieceData[coord.getRow()][coord.getCol()] = target;
     }
 
+    @Override
+    public void kill(Coord coord) {
+        this.boardEventListner.onKilled(super.pieceData[coord.getRow()][coord.getCol()]);
+        super.pieceData[coord.getRow()][coord.getCol()] = null;
+    }
+
     private boolean checkSafe(Coord prev, Coord post, Piece target){
         MoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
         return moveCheckerFactory.createMoveChecker(target).moveableCheck(prev,post);
+    }
+
+    @Override
+    public void setBoardEventListner(BoardEventListner boardEventListner) {
+        this.boardEventListner = boardEventListner;
+        Iterator<Observer> iterator =  super.observerIterator();
+        while(iterator.hasNext()){
+            Observer temp = iterator.next();
+            if(temp instanceof PromotionObserver){
+                ((PromotionObserver) temp).setBoardEventListner(boardEventListner);
+            }
+        }
     }
 
 

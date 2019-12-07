@@ -2,6 +2,7 @@ package concrete.shogi;
 
 import bean.Coord;
 import board.Board;
+import controller.BoardEventListner;
 import game.Game;
 import piece.Piece;
 
@@ -9,6 +10,12 @@ public class ShogiBoard extends Board {
     public ShogiBoard(Game.Accessor accessor){
         super(accessor);
     }
+
+    @Override
+    public void setBoardEventListner(BoardEventListner boardEventListner) {
+
+    }
+
     @Override
     public void init() {
 
@@ -21,6 +28,11 @@ public class ShogiBoard extends Board {
 
     @Override
     public void update(Piece piece, Coord coord) {
+
+    }
+
+    @Override
+    public void kill(Coord coord) {
 
     }
 }

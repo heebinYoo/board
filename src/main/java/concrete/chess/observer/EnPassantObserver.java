@@ -1,6 +1,7 @@
 package concrete.chess.observer;
 
 import bean.Coord;
+import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
@@ -8,7 +9,10 @@ import history.History;
 import history.Record;
 import observer.Observer;
 
+
+//BoardManager.getInstance().getBoardInstance().kill(prev);
 import java.util.Iterator;
+
 
 public class EnPassantObserver implements Observer {
     private ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
@@ -16,6 +20,7 @@ public class EnPassantObserver implements Observer {
     public void update(Coord prev, Coord post) {
         Iterator<Record> it = History.getInstance().iterator();
         if(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.pawn){
+
             //움직인게 pawn이라면
             if((prev.getCol()==History.getInstance().getLast().getPost().getCol())&&(post.getRow()==History.getInstance().getLast().getPost().getRow())
                     &&(Math.abs(post.getCol()-History.getInstance().getLast().getPost().getCol())==1)) {
@@ -34,6 +39,7 @@ public class EnPassantObserver implements Observer {
                         //TODO
                     }
                 }
+
             }
         }
 
