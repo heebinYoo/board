@@ -18,7 +18,9 @@ public class History {
     /* Method */
     public static History getInstance(){return HistoryHolder.INSTANCE;}
 
-    public void add(Record record){}
+    public void add(Record record){
+        records.add(record);
+    }
     public Record getLast(){
         if(records.size()==0) return null;
         return records.get(records.size()-1);
