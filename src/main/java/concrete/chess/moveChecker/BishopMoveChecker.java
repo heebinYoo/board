@@ -23,7 +23,7 @@ public class BishopMoveChecker implements MoveChecker {
         //int k=0;
         //Coord mod[]=new Coord[64];    //지금 움직일 수 있는 곳
         Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(coord);
-        for (int i = -1, j = 1; coord.getRow() + i < rowSize && coord.getCol() + j < colSize; i--, j++) {    //벽에 부딪힐 때까지
+        for (int i = -1, j = 1; coord.getRow() + i >=0&&coord.getRow() + i < rowSize &&  coord.getCol() + j >=0&&coord.getCol() + j < colSize; i--, j++) {    //벽에 부딪힐 때까지
             Coord mod0 = new Coord(coord.getRow() + i, coord.getCol() + j);    //지금 움직일 수 있는 곳
             Piece piece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod0);
             if (piece != null) {  //가려는 곳에 말이 존재
@@ -38,7 +38,7 @@ public class BishopMoveChecker implements MoveChecker {
             /* mod=null; */
         }
 
-        for (int i = 1, j = 1; coord.getRow() + i < rowSize && coord.getCol() + j < colSize; i++, j++) {    //벽에 부딪힐 때까지
+        for (int i = 1, j = 1; coord.getRow() + i >=0&&coord.getRow() + i < rowSize &&  coord.getCol() + j >=0&&coord.getCol() + j < colSize; i++, j++) {    //벽에 부딪힐 때까지
             //k++;
             Coord mod1 = new Coord(coord.getRow() + i, coord.getCol() + j);    //지금 움직일 수 있는 곳
             Piece piece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod1);
@@ -53,7 +53,7 @@ public class BishopMoveChecker implements MoveChecker {
             result.add(mod1);
         }
 
-        for (int i = -1, j = -1; coord.getRow() + i < rowSize && coord.getCol() + j < colSize; i--, j--) {    //벽에 부딪힐 때까지
+        for (int i = -1, j = -1; coord.getRow() + i >=0&&coord.getRow() + i < rowSize &&  coord.getCol() + j >=0&&coord.getCol() + j < colSize; i--, j--) {    //벽에 부딪힐 때까지
             //k++;
             Coord mod3 = new Coord(coord.getRow() + i, coord.getCol() + j);    //지금 움직일 수 있는 곳
             Piece piece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod3);
@@ -67,7 +67,7 @@ public class BishopMoveChecker implements MoveChecker {
             //말이 존재하지 않아
             result.add(mod3);
         }
-        for (int i = 1, j = -1; coord.getRow() + i < rowSize && coord.getCol() + j < colSize; i++, j--) {    //벽에 부딪힐 때까지
+        for (int i = 1, j = -1;  coord.getRow() + i >=0&&coord.getRow() + i < rowSize &&  coord.getCol() + j >=0&&coord.getCol() + j < colSize; i++, j--) {    //벽에 부딪힐 때까지
             //k++;
             Coord mod2 = new Coord(coord.getRow() + i, coord.getCol() + j);    //지금 움직일 수 있는 곳
             Piece piece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod2);

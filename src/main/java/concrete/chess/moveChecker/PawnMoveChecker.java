@@ -145,20 +145,26 @@ public class PawnMoveChecker implements MoveChecker {
             }
             //1.
 
-            Coord mod0 = new Coord(coord.getRow()+1, coord.getCol() + 1);    //지금 움직일 수 있는 곳
-            Piece piece0 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod0);  //그곳에 무언가
-            if(piece0!=null&&piece0.getPlayer()==2){//누가 있는데 적이다
-                result.add(mod0);
+            if(coord.getRow() + 1 >=0&&coord.getRow() + 1 < rowSize &&  coord.getCol() + 1 >=0&&coord.getCol() + 1 < colSize) {
+                Coord mod0 = new Coord(coord.getRow() + 1, coord.getCol() + 1);    //지금 움직일 수 있는 곳
+                Piece piece0 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod0);  //그곳에 무언가
+                if (piece0 != null && piece0.getPlayer() == 2) {//누가 있는데 적이다
+                    result.add(mod0);
+                }
             }
-            Coord mod1 = new Coord(coord.getRow()+1, coord.getCol() -1);    //지금 움직일 수 있는 곳
-            Piece piece1 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod1);  //그곳에 무언가
-            if(piece1!=null&&piece1.getPlayer()==2){//누가 있는데 적이다
-                result.add(mod1);
+            if(coord.getRow() + 1 >=0&&coord.getRow() + 1 < rowSize &&  coord.getCol() -1 >=0&&coord.getCol() -1 < colSize) {
+                Coord mod1 = new Coord(coord.getRow() + 1, coord.getCol() - 1);    //지금 움직일 수 있는 곳
+                Piece piece1 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod1);  //그곳에 무언가
+                if (piece1 != null && piece1.getPlayer() == 2) {//누가 있는데 적이다
+                    result.add(mod1);
+                }
             }
-            Coord mod2 = new Coord(coord.getRow()+1, coord.getCol() );    //지금 움직일 수 있는 곳
-            Piece piece2 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod2);  //그곳에 무언가
-            if(piece2==null){//앞에 아무도 없어
-                result.add(mod2);
+            if(coord.getRow() + 1 >=0&&coord.getRow() + 1 < rowSize ) {
+                Coord mod2 = new Coord(coord.getRow() + 1, coord.getCol());    //지금 움직일 수 있는 곳
+                Piece piece2 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod2);  //그곳에 무언가
+                if (piece2 == null) {//앞에 아무도 없어
+                    result.add(mod2);
+                }
             }
 
         }
@@ -181,30 +187,32 @@ public class PawnMoveChecker implements MoveChecker {
             }
             //1.
 
-            Coord mod0 = new Coord(coord.getRow()-1, coord.getCol()-1);    //지금 움직일 수 있는 곳
-            Piece piece0 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod0);  //그곳에 무언가
-            if(piece0!=null&&piece0.getPlayer()==1){//누가 있는데 적이다
-                result.add(mod0);
+            if(coord.getRow() - 1 >=0&&coord.getRow() - 1 < rowSize &&  coord.getCol() - 1 >=0&&coord.getCol() - 1 < colSize) {
+                Coord mod0 = new Coord(coord.getRow() - 1, coord.getCol() - 1);    //지금 움직일 수 있는 곳
+                Piece piece0 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod0);  //그곳에 무언가
+                if (piece0 != null && piece0.getPlayer() == 1) {//누가 있는데 적이다
+                    result.add(mod0);
+                }
             }
-            Coord mod1 = new Coord(coord.getRow()-1, coord.getCol() +1);    //지금 움직일 수 있는 곳
-            Piece piece1 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod1);  //그곳에 무언가
-            if(piece1!=null&&piece1.getPlayer()==1){//누가 있는데 적이다
-                result.add(mod1);
+            if(coord.getRow() -1 >=0&&coord.getRow() -1 < rowSize &&  coord.getCol() +1 >=0&&coord.getCol() +1 < colSize) {
+                Coord mod1 = new Coord(coord.getRow() - 1, coord.getCol() + 1);    //지금 움직일 수 있는 곳
+                Piece piece1 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod1);  //그곳에 무언가
+                if (piece1 != null && piece1.getPlayer() == 1) {//누가 있는데 적이다
+                    result.add(mod1);
+                }
             }
-            Coord mod2 = new Coord(coord.getRow()-1, coord.getCol() );    //지금 움직일 수 있는 곳
-            Piece piece2 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod2);  //그곳에 무언가
-            if(piece2==null){//앞에 아무도 없어
-                result.add(mod2);
+            if(coord.getRow() -1 >=0&&coord.getRow() - 1 < rowSize) {
+                Coord mod2 = new Coord(coord.getRow() - 1, coord.getCol());    //지금 움직일 수 있는 곳
+                Piece piece2 = BoardManager.getInstance().getBoardInstance().getPieceOn(mod2);  //그곳에 무언가
+                if (piece2 == null) {//앞에 아무도 없어
+                    result.add(mod2);
+                }
             }
 
         }
 
         return result;
     }
-
-
-
-
 
     @Override
     public boolean moveableCheck(Coord prev, Coord post) {

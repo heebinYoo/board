@@ -56,7 +56,7 @@ public ArrayList<Coord> getMoveableList(Coord coord) {
         result.add(mod1);
     }
 
-    for (int j=-1;coord.getCol()+j<colSize;j--){    //벽에 부딪힐 때까지
+    for (int j=-1;0<=coord.getCol()+j;j--){    //벽에 부딪힐 때까지
         //k++;
         Coord mod3=new Coord(coord.getRow(),coord.getCol()+j);    //지금 움직일 수 있는 곳
         Piece piece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod3);
@@ -71,7 +71,7 @@ public ArrayList<Coord> getMoveableList(Coord coord) {
         //말이 존재하지 않아
         result.add(mod3);
     }
-    for (int i=-1;coord.getRow()+i<rowSize;i--){    //벽에 부딪힐 때까지
+    for (int i=-1;0<=coord.getRow()+i;i--){    //벽에 부딪힐 때까지
         //k++;
         Coord mod2=new Coord(coord.getRow()+i,coord.getCol());    //지금 움직일 수 있는 곳
         Piece piece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod2);
