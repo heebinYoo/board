@@ -40,6 +40,9 @@ public class ListViewAdapter implements ItemEventListener {
             super(new BorderLayout(),true);
             this.position=position;
 
+            imgBtn.setBorderPainted(false);
+            imgBtn.setContentAreaFilled(false);
+            imgBtn.setFocusPainted(false);
             imgBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {

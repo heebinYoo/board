@@ -11,6 +11,10 @@ import concrete.chess.observer.EnPassantObserver;
 import concrete.chess.observer.PromotionObserver;
 import concrete.chess.piece.ChessPieceEnum;
 import exception.InvaildMoveException;
+
+import game.Game;
+import history.History;
+import history.Record;
 import moveChecker.MoveCheckerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +26,10 @@ public class ChessBoard extends Board {
 
     private final int BLACK = 1;
     private final int WHITE = 2;
+
+    public ChessBoard(Game.Accessor accessor){
+        super(accessor);
+    }
 
     //0,0 black-p1 ruke
     //7,7 white-p2 ruke

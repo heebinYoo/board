@@ -15,9 +15,9 @@ public class ConcreteBoardFactory implements BoardFactory {
     public Board createBoard(Game.Accessor accessor, GameList gameList) {
         switch (gameList){
             case chess:
-                return new ChessBoard();
+                return new ChessBoard(accessor);
             case shogi:
-                return new ShogiBoard();
+                return new ShogiBoard(accessor);
         }
         logger.error("game is not in the enum ConcreteBoardFactory!!!");
         return null;
