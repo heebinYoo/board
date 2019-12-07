@@ -56,6 +56,7 @@ public class KingMoveChecker implements MoveChecker {
                     //비어있거나 적군이 있음
                     Piece modpiece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod);
                     if (modpiece == null || modpiece.getPlayer() != malice.getPlayer()) {
+                        //비었거나 적이 있다면
                         //그 위치 체크 당하는지 안 당하는지
                         CheckChecker check=new CheckChecker();
                         if(!check.isCheck(malice,mod))
