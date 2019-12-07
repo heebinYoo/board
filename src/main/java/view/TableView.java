@@ -15,6 +15,8 @@ public class TableView extends JFrame {
     /* Test */
     static final Logger logger =
             LoggerFactory.getLogger(ListView.class);
+
+    /* Field */
     private TableClickListener tableClickListener;
     private TableViewAdapter tableViewAdapter;
     private JPanel mainPanel;

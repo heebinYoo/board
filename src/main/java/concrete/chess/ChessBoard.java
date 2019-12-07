@@ -102,8 +102,7 @@ public class ChessBoard extends Board {
 
     @Override
     public void update(Piece piece, Coord coord) {
-        Piece target = piece;
-        super.pieceData[coord.getRow()][coord.getCol()] = target;
+
     }
 
     @Override

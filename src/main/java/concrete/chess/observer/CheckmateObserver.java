@@ -8,10 +8,17 @@ import concrete.chess.CheckChecker;
 import concrete.chess.piece.ChessPieceEnum;
 import controller.BoardEventListner;
 import observer.Observer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import view.ListView;
 
 import java.util.ArrayList;
 
 public class CheckmateObserver implements Observer {
+    /* Test */
+    static final Logger logger =
+            LoggerFactory.getLogger(ListView.class);
+
     private ConcreteMoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
     private BoardEventListner boardEventListner;
     @Override
@@ -43,13 +50,15 @@ public class CheckmateObserver implements Observer {
                 if((BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType()==ChessPieceEnum.king)&&(BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer()!=BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer())){
                     //checkMate!!! exit
                     boardEventListner.onGameOver();
+                    logger.debug("Call GameOver");
                 }
             }
         }
-
+    }
 
     @Override
     public void setBoardEventListner(BoardEventListner boardEventListner) {
         this.boardEventListner=boardEventListner;
     }
+
 }
