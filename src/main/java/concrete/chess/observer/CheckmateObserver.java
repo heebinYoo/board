@@ -30,20 +30,24 @@ public class CheckmateObserver implements Observer {
         CheckChecker check = new CheckChecker();
         Coord king;
 
-        ArrayList<Coord> kingMove = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(post)).getMovableList(post);
-        for(Coord coord : kingMove) {
-            if (BoardManager.getInstance().getBoardInstance().getPieceOn(coord) != null && BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getType() == ChessPieceEnum.king) {
-                for (int k = -1; k <= 1; k++) {
-                    for (int l = -1; l <= 1; l++) {
-                        if (coord.getRow() + k < 8 && coord.getRow() + k >= 0 && coord.getCol() + l < 8 && coord.getCol() + l >= 0) {
-                            if(BoardManager.getInstance().getBoardInstance().getPieceOn(new Coord(coord.getRow() + k, coord.getCol() + l)) == null) {
-                                if (!check.isCheck(BoardManager.getInstance().getBoardInstance().getPieceOn(coord), new Coord(coord.getRow() + k, coord.getCol() + l)))
-                                    return;
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                Coord coord = new Coord(i, j);
+                if(BoardManager.getInstance().getBoardInstance().getPieceOn(coord) != null && BoardManager.getInstance().getBoardInstance().getPieceOn(coord).getType() == ChessPieceEnum.king){
+                    if(check.isCheck(BoardManager.getInstance().getBoardInstance().getPieceOn(coord), coord)) {
+                        for (int k = -1; k <= 1; k++) {
+                            for (int l = -1; l <= 1; l++) {
+                                if (coord.getRow() + k < 8 && coord.getRow() + k >= 0 && coord.getCol() + l < 8 && coord.getCol() + l >= 0) {
+                                    if (BoardManager.getInstance().getBoardInstance().getPieceOn(new Coord(coord.getRow() + k, coord.getCol() + l)) == null) {
+                                        if (!check.isCheck(BoardManager.getInstance().getBoardInstance().getPieceOn(coord), new Coord(coord.getRow() + k, coord.getCol() + l)))
+                                            return;
+                                    }
+                                }
                             }
                         }
+                        boardEventListener.onGameOver();
                     }
                 }
-                boardEventListener.onGameOver();
             }
         }
     }
