@@ -1,7 +1,6 @@
 package concrete.chess.moveChecker;
 import bean.Coord;
 import board.BoardManager;
-import concrete.ConcreteMoveCheckerFactory;
 import moveChecker.MoveChecker;
 import piece.Piece;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 public class BishopMoveChecker implements MoveChecker {
     @Override
-    public ArrayList<Coord> getMoveableList(Coord coord) {
+    public ArrayList<Coord> getMovableList(Coord coord) {
         ArrayList<Coord> result = new ArrayList<Coord>();
 
 
@@ -91,14 +90,14 @@ public class BishopMoveChecker implements MoveChecker {
     }
 
     @Override
-    public boolean moveableCheck(Coord prev, Coord post) {
+    public boolean movableCheck(Coord prev, Coord post) {
         //TODO
         //prev->post 로 가려고 한다!
         //없으면 false
         //list 있으면 true
 
         
-        ArrayList<Coord> isBishopThere = this.getMoveableList(prev);
+        ArrayList<Coord> isBishopThere = this.getMovableList(prev);
         for (int i = 0; i < isBishopThere.size(); i++) {
             if (isBishopThere.get(i).getRow()==post.getRow()&&isBishopThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
                 return true;

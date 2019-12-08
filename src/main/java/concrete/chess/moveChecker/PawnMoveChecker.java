@@ -1,7 +1,6 @@
 package concrete.chess.moveChecker;
 import bean.Coord;
 import board.BoardManager;
-import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
 import history.History;
 import history.Record;
@@ -16,7 +15,7 @@ import java.util.Iterator;
 //TODO
 public class PawnMoveChecker implements MoveChecker {
     @Override
-    public ArrayList<Coord> getMoveableList(Coord coord) {
+    public ArrayList<Coord> getMovableList(Coord coord) {
         ArrayList<Coord> result = new ArrayList<Coord>();
 
         int rowSize = BoardManager.getInstance().getBoardInstance().getBoardRowSize();
@@ -234,14 +233,14 @@ public class PawnMoveChecker implements MoveChecker {
     }
 
     @Override
-    public boolean moveableCheck(Coord prev, Coord post) {
+    public boolean movableCheck(Coord prev, Coord post) {
         //TODO
         //prev->post 로 가려고 한다!
         //없으면 false
         //list 있으면 true
 
 
-        ArrayList<Coord> isPawnThere = this.getMoveableList(prev);
+        ArrayList<Coord> isPawnThere = this.getMovableList(prev);
         for (int i = 0; i < isPawnThere.size(); i++) {
             if (isPawnThere.get(i).getRow()==post.getRow()&&isPawnThere.get(i).getCol()==post.getCol()) { //list 안에 post 좌표값 존재
                 return true;

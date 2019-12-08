@@ -4,8 +4,7 @@ import bean.Coord;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
-import controller.BoardEventListner;
-import exception.InvaildMoveException;
+import controller.BoardEventListener;
 import history.History;
 import history.Record;
 import moveChecker.MoveChecker;
@@ -16,8 +15,7 @@ import java.util.Iterator;
 
 public class KingMoveChecker implements MoveChecker {
 
-    //주석주석주석
-    public ArrayList<Coord> getMoveableList(Coord coord) {
+    public ArrayList<Coord> getMovableList(Coord coord) {
         ArrayList<Coord> result = new ArrayList<Coord>();
         int rowSize = BoardManager.getInstance().getBoardInstance().getBoardRowSize();
         int colSize = BoardManager.getInstance().getBoardInstance().getBoardColSize();
@@ -72,10 +70,10 @@ public class KingMoveChecker implements MoveChecker {
     }
 
 
-    public boolean moveableCheck(Coord prev, Coord post) {
+    public boolean movableCheck(Coord prev, Coord post) {
 
 
-        ArrayList<Coord> isKingThere = this.getMoveableList(prev);
+        ArrayList<Coord> isKingThere = this.getMovableList(prev);
         for (int i = 0; i < isKingThere.size(); i++) {
             if (isKingThere.get(i).getRow() == post.getRow() && isKingThere.get(i).getCol() == post.getCol()) { //list 안에 post 좌표값 존재
                 return true;
@@ -96,9 +94,6 @@ public class KingMoveChecker implements MoveChecker {
 현재 킹이 체크되어있으면 안된다.
 킹이 통과하는 칸에 적의 말이 이동가능해서는 안된다.*/
         Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(prev); //나7
-
-
-
 
         if (post.getCol() > prev.getCol()) {
             //오른쪽

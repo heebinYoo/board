@@ -37,7 +37,7 @@ public class EnPassantObserver implements Observer {
     }
 
     @Override
-    public void setBoardEventListner(BoardEventListner boardEventListner) {
+    public void setBoardEventListener(BoardEventListner boardEventListner) {
 
     }
 }

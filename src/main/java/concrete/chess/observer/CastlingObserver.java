@@ -1,11 +1,10 @@
 package concrete.chess.observer;
 
 import bean.Coord;
-import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
-import controller.BoardEventListner;
+import controller.BoardEventListener;
 import exception.InvaildMoveException;
 import observer.Observer;
 
@@ -41,7 +40,7 @@ public class CastlingObserver implements Observer {
     }
 
     @Override
-    public void setBoardEventListner(BoardEventListner boardEventListner) {
+    public void setBoardEventListener(BoardEventListener boardEventListener) {
 
     }
 }

@@ -9,7 +9,7 @@ import view.TableViewAdapter;
 
 public class main {
     public static void main(String[] args){
-        Game game = new Game(GameList.chess, new ConcreteBoardFactory(), new ConcreteMoveCheckerFactory());
+        Game game = new Game(GameList.twelveJanggi, new ConcreteBoardFactory(), new ConcreteMoveCheckerFactory());
         TableView view = new TableView(new TableViewAdapter(game.getBoard()));
         Controller controller = new Controller(game, view);
     }

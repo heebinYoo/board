@@ -1,4 +1,6 @@
 package concrete;
+import concrete.twelveJanggi.piece.TwelveJanggiPiece;
+import concrete.twelveJanggi.piece.TwelveJanggiPieceEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import piece.Piece;
@@ -17,6 +19,9 @@ public class ConcretePieceFactory implements PieceFactory {
         }
         else if(e instanceof ChessPieceEnum){
            return new ChessPiece(player,(ChessPieceEnum) e,id);
+        }
+        else if(e instanceof TwelveJanggiPieceEnum){
+            return new TwelveJanggiPiece(player, (TwelveJanggiPieceEnum)e, id);
         }
         //please add new game
         else{

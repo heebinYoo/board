@@ -27,6 +27,9 @@ public class PromotionPieceList extends ArrayList<Piece> {
             case shogi:
          //TODO
                 break;
+            case twelveJanggi:
+                //nothing
+                break;
         }
     }
 }

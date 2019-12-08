@@ -12,7 +12,7 @@ public class ShogiBoard extends Board {
     }
 
     @Override
-    public void setBoardEventListner(BoardEventListner boardEventListner) {
+    public void setBoardEventListener(BoardEventListner boardEventListner) {
 
     }
 
