@@ -1,7 +1,7 @@
 package board;
 
 import bean.Coord;
-import controller.BoardEventListner;
+import controller.BoardEventListener;
 import exception.InvaildMoveException;
 import game.Game;
 import observer.Observer;
@@ -15,7 +15,7 @@ public abstract class Board implements Publisher{
     protected abstract void init();
 
     public abstract void update(Coord prev, Coord post) throws InvaildMoveException;
-    public abstract void update(Piece piece, Coord coord);
+    public abstract boolean update(Piece piece, Coord coord);
     public abstract void kill(Coord coord);
 
 
@@ -28,7 +28,7 @@ public abstract class Board implements Publisher{
        return pieceData[coord.getRow()][coord.getCol()];
     }
 
-    public abstract void setBoardEventListener(BoardEventListner boardEventListner);
+    public abstract void setBoardEventListener(BoardEventListener boardEventListener);
 
     @Override
     public void add(Observer observer) {

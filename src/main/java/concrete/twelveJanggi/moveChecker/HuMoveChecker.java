@@ -19,12 +19,12 @@ public class HuMoveChecker extends CheckerBundle implements MoveChecker {
         if(movableCheck(coord, new Coord(coord.getRow(), coord.getCol()-1))) movableList.add(new Coord(coord.getRow(), coord.getCol()-1));
 
         if(piece.getPlayer()==1){
+            if(movableCheck(coord, new Coord(coord.getRow()-1, coord.getCol()+1))) movableList.add(new Coord(coord.getRow()-1, coord.getCol()+1));
             if(movableCheck(coord, new Coord(coord.getRow()+1, coord.getCol()+1))) movableList.add(new Coord(coord.getRow()+1, coord.getCol()+1));
-            if(movableCheck(coord, new Coord(coord.getRow()+1, coord.getCol()-1))) movableList.add(new Coord(coord.getRow()+1, coord.getCol()-1));
         }
         else{
-            if(movableCheck(coord, new Coord(coord.getRow()-1, coord.getCol()+1))) movableList.add(new Coord(coord.getRow()-1, coord.getCol()+1));
             if(movableCheck(coord, new Coord(coord.getRow()-1, coord.getCol()-1))) movableList.add(new Coord(coord.getRow()-1, coord.getCol()-1));
+            if(movableCheck(coord, new Coord(coord.getRow()+1, coord.getCol()-1))) movableList.add(new Coord(coord.getRow()-1, coord.getCol()-1));
         }
 
         return movableList;

@@ -6,7 +6,7 @@ import board.BoardFactory;
 import board.BoardManager;
 import concrete.GameList;
 
-import controller.BoardEventListner;
+import controller.BoardEventListener;
 import exception.InvaildMoveException;
 import history.History;
 import history.Record;
@@ -72,12 +72,12 @@ public class Game{
         }
     }
     public void update(Piece piece, Coord coord){
-        BoardManager.getInstance().getBoardInstance().update(piece,coord);
-        turn = turn==1 ? 2 : 1;
+        if(BoardManager.getInstance().getBoardInstance().update(piece,coord))
+            turn = turn==1 ? 2 : 1;
     }
 
-    public void setBoardEventListner(BoardEventListner boardEventListner){
-        BoardManager.getInstance().getBoardInstance().setBoardEventListener(boardEventListner);
+    public void setBoardEventListner(BoardEventListener boardEventListener){
+        BoardManager.getInstance().getBoardInstance().setBoardEventListener(boardEventListener);
     }
 
 

@@ -1,11 +1,10 @@
 package concrete.chess.observer;
 
 import bean.Coord;
-import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
-import controller.BoardEventListner;
+import controller.BoardEventListener;
 import history.History;
 import history.Record;
 import observer.Observer;
@@ -37,7 +36,7 @@ public class EnPassantObserver implements Observer {
     }
 
     @Override
-    public void setBoardEventListener(BoardEventListner boardEventListner) {
+    public void setBoardEventListener(BoardEventListener boardEventListener) {
 
     }
 }

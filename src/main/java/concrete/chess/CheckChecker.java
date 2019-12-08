@@ -28,7 +28,7 @@ public class CheckChecker {
         }
         for(int i=0;i<EnemyPiece.size();i++)if(BoardManager.getInstance().getBoardInstance().getPieceOn(EnemyPiece.get(i)).getType() == king.getType())EnemyPiece.remove(i);
         for(int i = 0;i<EnemyPiece.size();i++){
-            ArrayList<Coord> CheckOrNot = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(EnemyPiece.get(i))).getMoveableList(EnemyPiece.get(i));
+            ArrayList<Coord> CheckOrNot = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(EnemyPiece.get(i))).getMovableList(EnemyPiece.get(i));
             for(int j = 0; j < CheckOrNot.size(); j++){
                 if(CheckOrNot.get(j)==destination){
                     //checked

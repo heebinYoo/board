@@ -14,7 +14,7 @@ import view.TableView;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Controller implements TableClickListener, BoardEventListner{
+public class Controller implements TableClickListener, BoardEventListener {
     /* Test */
     static final Logger logger =
             LoggerFactory.getLogger(Controller.class);
@@ -47,7 +47,7 @@ public class Controller implements TableClickListener, BoardEventListner{
     private ListClickListener promotionView2Listener = new ListClickListener() {
         @Override
         public void onClick(JPanel jPanel, int position) {
-            promotionView1.setVisible(false);
+            promotionView2.setVisible(false);
             selectedListener.onSelect(new PromotionPieceList(game.getGameType(),2).get(position));
             tableView.notifyUpdated();
         }

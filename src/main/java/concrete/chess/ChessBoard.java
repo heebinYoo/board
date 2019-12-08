@@ -7,8 +7,7 @@ import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
 import concrete.chess.observer.*;
 import concrete.chess.piece.ChessPieceEnum;
-import controller.BoardEventListner;
-import controller.Controller;
+import controller.BoardEventListener;
 import exception.InvaildMoveException;
 
 import game.Game;
@@ -26,7 +25,7 @@ public class ChessBoard extends Board {
 
     private final int BLACK = 1;
     private final int WHITE = 2;
-    private BoardEventListner boardEventListner;
+    private BoardEventListener boardEventListener;
     public ChessBoard(Game.Accessor accessor){
         super(accessor);
     }
@@ -91,8 +90,8 @@ public class ChessBoard extends Board {
          */
             super.pieceData[prev.getRow()][prev.getCol()] = null;
             if(super.pieceData[post.getRow()][post.getCol()]!=null)
-                if(super.pieceData[post.getRow()][post.getCol()].getType() == ChessPieceEnum.king)this.boardEventListner.onGameOver();
-                else this.boardEventListner.onKilled(super.pieceData[post.getRow()][post.getCol()]);
+                if(super.pieceData[post.getRow()][post.getCol()].getType() == ChessPieceEnum.king)this.boardEventListener.onGameOver();
+                else this.boardEventListener.onKilled(super.pieceData[post.getRow()][post.getCol()]);
             super.pieceData[post.getRow()][post.getCol()] = target;
             notifyObserver(prev, post);
             /*
@@ -106,16 +105,19 @@ public class ChessBoard extends Board {
     }
 
     @Override
-    public void update(Piece piece, Coord coord) {
+    public boolean update(Piece piece, Coord coord) {
         if(piece.getType()!=ChessPieceEnum.pawn){
-            if( piece.getId().indexOf('0')==-1 && piece.getId().indexOf('1')==-1 )
+            if( piece.getId().indexOf('0')==-1 && piece.getId().indexOf('1')==-1 ) {
                 super.pieceData[coord.getRow()][coord.getCol()] = piece;
+                return true;
+            }
         }
+        return false;
     }
 
     @Override
     public void kill(Coord coord) {
-        this.boardEventListner.onKilled(super.pieceData[coord.getRow()][coord.getCol()]);
+        this.boardEventListener.onKilled(super.pieceData[coord.getRow()][coord.getCol()]);
         super.pieceData[coord.getRow()][coord.getCol()] = null;
     }
 
@@ -125,11 +127,11 @@ public class ChessBoard extends Board {
     }
 
     @Override
-    public void setBoardEventListener(BoardEventListner boardEventListner) {
-        this.boardEventListner = boardEventListner;
+    public void setBoardEventListener(BoardEventListener boardEventListener) {
+        this.boardEventListener = boardEventListener;
         Iterator<Observer> iterator =  super.observerIterator();
         while(iterator.hasNext()){
-            iterator.next().setBoardEventListener(boardEventListner);
+            iterator.next().setBoardEventListener(boardEventListener);
         }
     }
 

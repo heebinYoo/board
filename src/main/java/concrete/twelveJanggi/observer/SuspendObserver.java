@@ -1,33 +1,30 @@
 package concrete.twelveJanggi.observer;
 
 import bean.Coord;
-import board.Board;
 import board.BoardManager;
 import concrete.twelveJanggi.piece.TwelveJanggiPieceEnum;
-import controller.BoardEventListner;
+import controller.BoardEventListener;
 import history.History;
 import history.Record;
 import observer.Observer;
 
-import java.util.Iterator;
-
 public class SuspendObserver implements Observer {
     /* Field */
-    BoardEventListner boardEventListner;
+    BoardEventListener boardEventListener;
 
     @Override
     public void update(Coord prev, Coord post) {
         Record record = History.getInstance().getLast();
         if(record != null && record.getPiece().getType() == TwelveJanggiPieceEnum.wang)
             if(record.getPiece().getPlayer()==1 && record.getPost().getCol()==3){
-               if(record.getPiece().equals(BoardManager.getInstance().getBoardInstance().getPieceOn(record.getPost()))) boardEventListner.onGameOver();
+               if(record.getPiece().equals(BoardManager.getInstance().getBoardInstance().getPieceOn(record.getPost()))) boardEventListener.onGameOver();
             }else if(record.getPiece().getPlayer()==2 && record.getPost().getCol()==0){
-                if(record.getPiece().equals(BoardManager.getInstance().getBoardInstance().getPieceOn(record.getPost()))) boardEventListner.onGameOver();
+                if(record.getPiece().equals(BoardManager.getInstance().getBoardInstance().getPieceOn(record.getPost()))) boardEventListener.onGameOver();
             }
     }
 
     @Override
-    public void setBoardEventListener(BoardEventListner boardEventListner) {
-        this.boardEventListner = boardEventListner;
+    public void setBoardEventListener(BoardEventListener boardEventListener) {
+        this.boardEventListener = boardEventListener;
     }
 }

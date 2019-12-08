@@ -1,11 +1,9 @@
 package concrete.chess.observer;
 
 import bean.Coord;
-import board.Board;
 import board.BoardManager;
-import concrete.ConcreteMoveCheckerFactory;
 import concrete.chess.piece.ChessPieceEnum;
-import controller.BoardEventListner;
+import controller.BoardEventListener;
 import observer.Observer;
 import piece.Piece;
 
@@ -13,11 +11,11 @@ public class PromotionObserver implements Observer, SelectedListener {
     private Piece lastPiece;
     private Coord lastCoord;
 
-    BoardEventListner boardEventListner;
+    BoardEventListener boardEventListener;
 
     @Override
-    public void setBoardEventListener(BoardEventListner boardEventListner) {
-        this.boardEventListner = boardEventListner;
+    public void setBoardEventListener(BoardEventListener boardEventListener) {
+        this.boardEventListener = boardEventListener;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class PromotionObserver implements Observer, SelectedListener {
             if (post.getRow() == 0 || post.getRow() == 7) {
                 lastPiece = BoardManager.getInstance().getBoardInstance().getPieceOn(post);
                 lastCoord = post;
-                boardEventListner.onPromoted(lastPiece, this);
+                boardEventListener.onPromoted(lastPiece, this);
             }
         }
     }

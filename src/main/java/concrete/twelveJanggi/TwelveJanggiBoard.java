@@ -3,15 +3,13 @@ package concrete.twelveJanggi;
 import bean.Coord;
 import board.Board;
 import board.BoardManager;
-import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
-import concrete.chess.observer.PromotionObserver;
+import concrete.twelveJanggi.observer.PromotionObserver;
 import concrete.twelveJanggi.observer.SuspendObserver;
 import concrete.twelveJanggi.piece.TwelveJanggiPieceEnum;
-import controller.BoardEventListner;
+import controller.BoardEventListener;
 import exception.InvaildMoveException;
 import game.Game;
-import moveChecker.MoveCheckerFactory;
 import observer.Observer;
 import piece.Piece;
 import piece.PieceFactory;
@@ -23,7 +21,7 @@ public class TwelveJanggiBoard extends Board {
     /* Field */
     private final int RED = 1;
     private final int GREEN = 2;
-    private BoardEventListner boardEventListner;
+    private BoardEventListener boardEventListener;
 
     /* Constructor */
     public TwelveJanggiBoard(Game.Accessor accessor){
@@ -60,22 +58,30 @@ public class TwelveJanggiBoard extends Board {
     }
 
     @Override
-    public void update(Piece piece, Coord coord) {
-        if(piece.getType() == TwelveJanggiPieceEnum.hu)
-        super.pieceData[coord.getRow()][coord.getCol()] = null;
+    public boolean update(Piece piece, Coord coord) {
+        if(piece.getType() == TwelveJanggiPieceEnum.hu) {
+            super.pieceData[coord.getRow()][coord.getCol()] = piece;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void kill(Coord coord) {
-        if (super.pieceData[coord.getRow()][coord.getCol()].getType() == TwelveJanggiPieceEnum.wang) boardEventListner.onGameOver();
-        this.boardEventListner.onKilled(super.pieceData[coord.getRow()][coord.getCol()]);
+        if (super.pieceData[coord.getRow()][coord.getCol()].getType() == TwelveJanggiPieceEnum.wang) boardEventListener.onGameOver();
+        if (super.pieceData[coord.getRow()][coord.getCol()].getType() == TwelveJanggiPieceEnum.hu) {
+            if(super.pieceData[coord.getRow()][coord.getCol()].getPlayer() == 1)
+            super.pieceData[coord.getRow()][coord.getCol()] = new ConcretePieceFactory().createPiece(RED, TwelveJanggiPieceEnum.za, "red" + "za");
+            else super.pieceData[coord.getRow()][coord.getCol()] = new ConcretePieceFactory().createPiece(GREEN, TwelveJanggiPieceEnum.za, "green" + "za");
+        }
+        this.boardEventListener.onKilled(super.pieceData[coord.getRow()][coord.getCol()]);
         super.pieceData[coord.getRow()][coord.getCol()] = null;
     }
 
     @Override
-    public void setBoardEventListener(BoardEventListner boardEventListner) {
-        this.boardEventListner = boardEventListner;
+    public void setBoardEventListener(BoardEventListener boardEventListener) {
+        this.boardEventListener = boardEventListener;
         Iterator<Observer> iterator = super.observerIterator();
-        while (iterator.hasNext())iterator.next().setBoardEventListener(boardEventListner);
+        while (iterator.hasNext())iterator.next().setBoardEventListener(boardEventListener);
     }
 }
