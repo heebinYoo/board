@@ -6,6 +6,7 @@ import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
 import concrete.chess.observer.PromotionObserver;
+import concrete.twelveJanggi.observer.SuspendObserver;
 import concrete.twelveJanggi.piece.TwelveJanggiPieceEnum;
 import controller.BoardEventListner;
 import exception.InvaildMoveException;
@@ -45,30 +46,28 @@ public class TwelveJanggiBoard extends Board {
         super.pieceData[2][3] = pieceFactory.createPiece(GREEN, TwelveJanggiPieceEnum.sang, "green"+"sang");
         super.pieceData[1][2] = pieceFactory.createPiece(GREEN, TwelveJanggiPieceEnum.za, "green"+"za");
 
-        // TODO make observers
         super.add(new PromotionObserver());
-
+        super.add(new SuspendObserver());
     }
 
     @Override
     public void update(Coord prev, Coord post) throws InvaildMoveException {
         Piece target = BoardManager.getInstance().getBoardInstance().getPieceOn(prev);
-
-        if(checkSafe(prev, post, target)){
-            super.pieceData[prev.getRow()][prev.getCol()] = null;
-            if(super.pieceData[post.getRow()][post.getCol()] != null) kill(post);
-            super.pieceData[post.getRow()][post.getCol()] = target;
-            notifyObserver(prev, post);
-        }else throw new InvaildMoveException(prev, post, target);
+        super.pieceData[prev.getRow()][prev.getCol()] = null;
+        if(super.pieceData[post.getRow()][post.getCol()] != null) kill(post);
+        super.pieceData[post.getRow()][post.getCol()] = target;
+        notifyObserver(prev, post);
     }
 
     @Override
     public void update(Piece piece, Coord coord) {
-
+        if(piece.getType() == TwelveJanggiPieceEnum.hu)
+        super.pieceData[coord.getRow()][coord.getCol()] = null;
     }
 
     @Override
     public void kill(Coord coord) {
+        if (super.pieceData[coord.getRow()][coord.getCol()].getType() == TwelveJanggiPieceEnum.wang) boardEventListner.onGameOver();
         this.boardEventListner.onKilled(super.pieceData[coord.getRow()][coord.getCol()]);
         super.pieceData[coord.getRow()][coord.getCol()] = null;
     }
@@ -78,10 +77,5 @@ public class TwelveJanggiBoard extends Board {
         this.boardEventListner = boardEventListner;
         Iterator<Observer> iterator = super.observerIterator();
         while (iterator.hasNext())iterator.next().setBoardEventListener(boardEventListner);
-    }
-
-    private boolean checkSafe(Coord prev, Coord post, Piece target){
-        MoveCheckerFactory moveCheckerFactory = new ConcreteMoveCheckerFactory();
-        return moveCheckerFactory.createMoveChecker(target).movableCheck(prev, post);
     }
 }
