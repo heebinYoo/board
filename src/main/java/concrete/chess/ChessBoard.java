@@ -5,12 +5,10 @@ import board.Board;
 import board.BoardManager;
 import concrete.ConcreteMoveCheckerFactory;
 import concrete.ConcretePieceFactory;
-import concrete.chess.observer.CastlingObserver;
-import concrete.chess.observer.CheckmateObserver;
-import concrete.chess.observer.EnPassantObserver;
-import concrete.chess.observer.PromotionObserver;
+import concrete.chess.observer.*;
 import concrete.chess.piece.ChessPieceEnum;
 import controller.BoardEventListner;
+import controller.Controller;
 import exception.InvaildMoveException;
 
 import game.Game;
@@ -87,22 +85,32 @@ public class ChessBoard extends Board {
     public void update(Coord prev, Coord post) throws InvaildMoveException {
         Piece target = BoardManager.getInstance().getBoardInstance().getPieceOn(prev);
 
+        /*
         if(checkSafe(prev,post,target)) {
+
+         */
             super.pieceData[prev.getRow()][prev.getCol()] = null;
             if(super.pieceData[post.getRow()][post.getCol()]!=null)
-                this.boardEventListner.onKilled(super.pieceData[post.getRow()][post.getCol()]);
+                if(super.pieceData[post.getRow()][post.getCol()].getType() == ChessPieceEnum.king)this.boardEventListner.onGameOver();
+                else this.boardEventListner.onKilled(super.pieceData[post.getRow()][post.getCol()]);
             super.pieceData[post.getRow()][post.getCol()] = target;
             notifyObserver(prev, post);
+            /*
         }
         else{
             throw new InvaildMoveException(prev, post, target);
         }
 
+             */
+
     }
 
     @Override
     public void update(Piece piece, Coord coord) {
-
+        if(piece.getType()!=ChessPieceEnum.pawn){
+            if( piece.getId().indexOf('0')==-1 && piece.getId().indexOf('1')==-1 )
+                super.pieceData[coord.getRow()][coord.getCol()] = piece;
+        }
     }
 
     @Override
@@ -124,6 +132,5 @@ public class ChessBoard extends Board {
             iterator.next().setBoardEventListner(boardEventListner);
         }
     }
-
 
 }

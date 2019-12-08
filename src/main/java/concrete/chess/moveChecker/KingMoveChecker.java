@@ -34,7 +34,7 @@ public class KingMoveChecker implements MoveChecker {
         //캐슬링인지
         //가려고 하는 곳(캐슬링 가능시)
 
-        Coord CastlingWay1 = new Coord(coord.getRow(), coord.getCol() + 3);
+        Coord CastlingWay1 = new Coord(coord.getRow(), coord.getCol() + 2);
         Coord CastlingWay2 = new Coord(coord.getRow(), coord.getCol() - 2);
         if (coord.getRow() == 0 || coord.getRow() == 7){
             if (update(coord, CastlingWay1)) {
@@ -48,22 +48,23 @@ public class KingMoveChecker implements MoveChecker {
 
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (i == 0 && j == 0)
-                    break;
-                Coord mod = new Coord(coord.getRow() + i, coord.getCol() + j);
-                if (mod.getRow() >= 0 && mod.getRow() < rowSize && mod.getCol() >= 0 && mod.getCol() < colSize) {
-                    //일단 판위임
-                    //비어있거나 적군이 있음
-                    Piece modpiece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod);
-                    if (modpiece == null || modpiece.getPlayer() != malice.getPlayer()) {
-                        //비었거나 적이 있다면
-                        //그 위치 체크 당하는지 안 당하는지
-                        CheckChecker check=new CheckChecker();
-                        if(!check.isCheck(malice,mod))
-                            result.add(mod);
-                    }
+                if (i != 0 || j != 0){
+                    Coord mod = new Coord(coord.getRow() + i, coord.getCol() + j);
+                    if (mod.getRow() >= 0 && mod.getRow() < rowSize && mod.getCol() >= 0 && mod.getCol() < colSize) {
+                        //일단 판위임
+                        //비어있거나 적군이 있음
+                        Piece modpiece = BoardManager.getInstance().getBoardInstance().getPieceOn(mod);
+                        if (modpiece == null || modpiece.getPlayer() != malice.getPlayer()) {
+                            //비었거나 적이 있다면
+                            //그 위치 체크 당하는지 안 당하는지
+                            CheckChecker check=new CheckChecker();
+                            if(!check.isCheck(malice,mod))
+                                result.add(mod);
+                        }
 
+                    }
                 }
+
             }
         }
 
@@ -95,7 +96,11 @@ public class KingMoveChecker implements MoveChecker {
 현재 킹이 체크되어있으면 안된다.
 킹이 통과하는 칸에 적의 말이 이동가능해서는 안된다.*/
         Piece malice = BoardManager.getInstance().getBoardInstance().getPieceOn(prev); //나7
-        if (post.getCol() == 6) {
+
+
+
+
+        if (post.getCol() > prev.getCol()) {
             //오른쪽
             Iterator<Record> it = History.getInstance().iterator();
             while (it.hasNext()) {
@@ -106,13 +111,12 @@ public class KingMoveChecker implements MoveChecker {
                 }
                 if ((piece.getType().equals(ChessPieceEnum.rukh)) &&
                         (piece.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer())) {//내쪽 룩
-                    if (piece.getId().equals(7))//오른쪽 룩
+                    if (piece.getId()=="1")//오른쪽 룩
                         return false;   //past rukh moved
                 }
-
             }
-            for (int j = 4; j < 7; j++) {
-                Coord rightexist = new Coord(prev.getRow(), j);
+            for (int j = 1; j < 3; j++) {
+                Coord rightexist = new Coord(prev.getRow(), prev.getCol() + j);
                 Piece right = BoardManager.getInstance().getBoardInstance().getPieceOn(rightexist);
                 if (right != null)
                     return false;
@@ -127,7 +131,7 @@ public class KingMoveChecker implements MoveChecker {
             }
         }
 
-        if (post.getCol() == 1) {
+        if (post.getCol() < prev.getCol()) {
             //왼쪽
             Iterator<Record> it = History.getInstance().iterator();
             while (it.hasNext()) {
@@ -138,13 +142,12 @@ public class KingMoveChecker implements MoveChecker {
                 }
                 if ((piece.getType().equals(ChessPieceEnum.rukh)) &&
                         (piece.getPlayer() == BoardManager.getInstance().getBoardInstance().getPieceOn(prev).getPlayer())) {//내쪽 룩
-                    if (piece.getId().equals(0))//오른쪽 룩
+                    if (piece.getId() == "0")//오른쪽 룩
                         return false;   //past rukh moved
                 }
-
             }
             for (int j = 1; j < 3; j++) {
-                Coord leftexist = new Coord(prev.getRow(), j);
+                Coord leftexist = new Coord(prev.getRow(), prev.getCol() - j);
                 Piece right = BoardManager.getInstance().getBoardInstance().getPieceOn(leftexist);
                 if (right != null)
                     return false;

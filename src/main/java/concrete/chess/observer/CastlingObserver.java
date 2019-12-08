@@ -16,21 +16,19 @@ public class CastlingObserver implements Observer {
     public void update(Coord prev, Coord post) {
         boolean rukh1 = false, rukh2 = false;
 
-        if ((BoardManager.getInstance().getBoardInstance().getPieceOn(post) != null) && (BoardManager.getInstance().getBoardInstance().getPieceOn(prev) != null)) {
-            if ((BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.king) && (Math.abs(prev.getRow() - post.getRow()) == 2)) {
-                //can castling
-                //change rukh
-                if ((prev.getCol() - post.getCol()) > 0) {
-                    Coord prev_rukh = new Coord(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer() * 7 - 7, 7);
-                    Coord post_rukh = new Coord(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer() * 7 - 7, 5);
+        if (BoardManager.getInstance().getBoardInstance().getPieceOn(post) != null && BoardManager.getInstance().getBoardInstance().getPieceOn(post).getType() == ChessPieceEnum.king){
+            if(Math.abs(prev.getCol() - post.getCol()) == 2){
+                if ((prev.getCol() - post.getCol()) > 0) { // 왼쪽
+                    Coord prev_rukh = new Coord(post.getRow(),0);
+                    Coord post_rukh = new Coord(post.getRow(), post.getCol()+1);
                     try {
                         BoardManager.getInstance().getBoardInstance().update(prev_rukh, post_rukh);
                     } catch (InvaildMoveException e) {
                         e.printStackTrace();
                     }
-                } else {
-                    Coord prev_rukh = new Coord(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer() * 7 - 7, 0);
-                    Coord post_rukh = new Coord(BoardManager.getInstance().getBoardInstance().getPieceOn(post).getPlayer() * 7 - 7, 3);
+                } else { // 오른쪽
+                    Coord prev_rukh = new Coord(post.getRow(), 7);
+                    Coord post_rukh = new Coord(post.getRow(), post.getCol()-1);
                     try {
                         BoardManager.getInstance().getBoardInstance().update(prev_rukh, post_rukh);
                     } catch (InvaildMoveException e) {
@@ -38,12 +36,9 @@ public class CastlingObserver implements Observer {
                     }
                 }
             }
-
         }
+
     }
-
-
-
 
     @Override
     public void setBoardEventListner(BoardEventListner boardEventListner) {
