@@ -30,7 +30,7 @@ public class CheckChecker {
         for(int i = 0;i<EnemyPiece.size();i++){
             ArrayList<Coord> CheckOrNot = moveCheckerFactory.createMoveChecker(BoardManager.getInstance().getBoardInstance().getPieceOn(EnemyPiece.get(i))).getMovableList(EnemyPiece.get(i));
             for(int j = 0; j < CheckOrNot.size(); j++){
-                if(CheckOrNot.get(j)==destination){
+                if(CheckOrNot.get(j).getRow() == destination.getRow() && CheckOrNot.get(j).getCol() == destination.getCol()){
                     //checked
                     return true;
                 }
